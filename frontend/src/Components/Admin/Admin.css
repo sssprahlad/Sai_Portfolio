@@ -68,6 +68,15 @@
     pointer-events: none;
 }
 
+.visable {
+    cursor: pointer;
+}
+
+.hidden {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
 .filter-container {
     position: relative;
 }
@@ -200,7 +209,7 @@
   margin-top: 8px;
   z-index: 1000;
 }
-.logout-button {
+/* .logout-button {
     min-width: 140px;
     padding: 0.75rem 1.25rem;
     border-radius: 6px;
@@ -215,10 +224,10 @@
     justify-content: center;
     gap: 0.5rem;
     transition: all 0.2s ease;
-    white-space: nowrap;
-}
+    
+} */
 
-/* Table Styles */
+
 .projects-table-container {
     background: #fff;
     border-radius: 8px;

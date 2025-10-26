@@ -13,6 +13,7 @@ import { IoHomeOutline } from "react-icons/io5";
 import { BiErrorCircle } from "react-icons/bi";
 import { GoProjectSymlink } from "react-icons/go";
 import { LuPhoneCall } from "react-icons/lu";
+import { GrUserAdmin } from "react-icons/gr";
 
 
 
@@ -80,6 +81,9 @@ const Navbar = () => {
     const navigate = useNavigate();    
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+    const token = localStorage.getItem("token");
+    console.log(token);
+
 
     const handleThemeChange = () => {
         setDarkMode(!darkMode);
@@ -93,6 +97,10 @@ const Navbar = () => {
        }, 400);
     }
 
+      const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/");
+    }
 
 
 
@@ -108,11 +116,13 @@ const Navbar = () => {
                     <li><Link className="nav-link" to="/about">About </Link></li>
                     <li><Link className="nav-link" to="/projects">Projects </Link></li>
                     <li><Link className="nav-link" to="/contact">Contact </Link></li>
+                    {token && <li><Link className="nav-link" to="/admin">Admin </Link></li>}
+                    
                 </ul>
                 
                 <div className="admin-part">
                     <MaterialUISwitch checked={darkMode} onChange={handleThemeChange} />
-                    <button type="button" onClick={handleAdminClick} className="admin-button">Admin</button>
+                  {!token ? <button type="button" onClick={handleAdminClick} className="admin-button">Admin</button> : <button className='logout-button' onClick={handleLogout}>Logout</button>} 
                 </div>
 
             </nav>
@@ -123,7 +133,7 @@ const Navbar = () => {
             <h2>Portfolio</h2>
            <div className="admin-part">
                     <MaterialUISwitch checked={darkMode} onChange={handleThemeChange} />
-                    <button type="button" onClick={handleAdminClick} className="admin-button">Admin</button>
+                    {!token ? <button type="button" onClick={handleAdminClick} className="admin-button">Admin</button> : <button className='logout-button' onClick={handleLogout}>Logout</button>}
                 </div>
             <div className="mobile-navbar-icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
               {mobileMenuOpen ? <MdOutlineCancel /> : <GiHamburgerMenu />}
@@ -138,17 +148,12 @@ const Navbar = () => {
                 <li onClick={handleNavClick}><Link className="nav-link" to="/about"> <BiErrorCircle className='nav-link-icon'/> About </Link></li>
                 <li onClick={handleNavClick}><Link className="nav-link" to="/projects"> <GoProjectSymlink className='nav-link-icon'/> Projects </Link></li>
                 <li onClick={handleNavClick}><Link className="nav-link" to="/contact"> <LuPhoneCall className='nav-link-icon'/> Contact </Link></li>
+                {token && <li onClick={handleNavClick}><Link className="nav-link" to="/admin"> <GrUserAdmin className='nav-link-icon'/> Admin </Link></li>}
               </ul>
             </div>
           )}
 
-
-
-
         </div>
-
-
-
         </>
 
         

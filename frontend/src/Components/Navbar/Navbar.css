@@ -78,9 +78,23 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
+.logout-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    
+}
 
 .admin-button:hover {
     background-color: #3a7bc8;
+}
+.logout-button:hover {
+    background-color: #c0392b;
 }
 
 .mobile-navbar {
@@ -201,3 +215,4 @@
 .MuiSwitch-track {
     background-color: #666 !important;
 }
+

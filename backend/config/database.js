@@ -52,5 +52,21 @@ db.run(`
         )
         `);
 
+        db.run(`
+            CREATE TABLE IF NOT EXISTS myExperience (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                company TEXT NOT NULL,
+                position TEXT NOT NULL,
+                duration TEXT NOT NULL  
+            )
+            `);
+
+            db.run(`CREATE TABLE IF NOT EXISTS responsibilities (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              experienceId INTEGER NOT NULL,
+              responsibility TEXT NOT NULL,
+              FOREIGN KEY (experienceId) REFERENCES myExperience(id) ON DELETE CASCADE
+            )`);
+
 
 module.exports = db;

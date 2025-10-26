@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../config/database");
+const authMiddleware = require("../middleware/authMiddleware");
 
-router.post("/projects", (req, res) => {
+router.post("/projects", authMiddleware, (req, res) => {
     const {image, title, technologies, gitUrl, projectLink, description } = req.body;
     console.log(req.body);
 
@@ -23,7 +24,7 @@ router.post("/projects", (req, res) => {
     );
 });
 
-router.get("/projects", (req, res) => {
+router.get("/projects", authMiddleware, (req, res) => {
     db.all("SELECT * FROM projects", [], (err, rows) => {
         if (err) {
             console.error(err);
@@ -33,7 +34,7 @@ router.get("/projects", (req, res) => {
     });
 });
 
-router.delete("/projects/:id", (req, res) => {
+router.delete("/projects/:id", authMiddleware, (req, res) => {
     const { id } = req.params;
     db.run("DELETE FROM projects WHERE id = ?", [id], (err) => {
         if (err) {
@@ -44,7 +45,7 @@ router.delete("/projects/:id", (req, res) => {
     });
 });
 
-router.patch("/projects/:id", (req, res) => {
+router.patch("/projects/:id", authMiddleware, (req, res) => {
     const { id } = req.params;
     const { image, title, technologies, gitUrl, projectLink, description } = req.body;
     db.run(
@@ -60,7 +61,7 @@ router.patch("/projects/:id", (req, res) => {
     );
 });
 
-router.get("/projects/search", (req, res) => {
+router.get("/projects/search", authMiddleware, (req, res) => {
     const { search } = req.query;
     db.all("SELECT * FROM projects WHERE title LIKE ?", [`%${search}%`], (err, rows) => {
         if (err) {

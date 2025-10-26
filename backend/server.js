@@ -4,6 +4,7 @@ const authRouter = require("./routes/authRouters");
 const projectsRouter = require("./routes/projectsRouters");
 const myDetailsRouter = require("./routes/myDetailsRouters");
 const authMiddleware = require("./middleware/authMiddleware");
+const myExperienceRouter = require("./routes/myExperienceRouter");
 const cors = require("cors");
 const path = require("path");
 require("dotenv").config();
@@ -28,6 +29,8 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api", authRouter);
 app.use("/api", projectsRouter);
 app.use("/api", myDetailsRouter);
+app.use("/api", myExperienceRouter);
+
 
 app.get("/api/protected", authMiddleware, (req, res) => {
   res.json({ message: "This is a protected route", user: req.user });
