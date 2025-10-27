@@ -10,7 +10,7 @@
 }
 
 .admin-header {
-    background: #fff;
+    /* background: #fff; */
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -40,7 +40,7 @@
     width: 100%;
     padding: 0.75rem 1rem 0.75rem 2.5rem;
     border-radius: 6px;
-    border: 1px solid #ddd;
+    border: 1px solid black;
     font-size: 0.95rem;
     transition: all 0.2s ease;
     background-color: #fff;
@@ -229,18 +229,23 @@
 
 
 .projects-table-container {
-    background: #fff;
+    /* background: #fff; */
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin-top: 2rem;
     overflow-x: auto;
     width: 100%;
+
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.95rem;
+    /* background-color: #fff; */
+    background-color: var(--bg-dark);
+    box-shadow: 0 2px 10px rgba(233, 227, 227, 0.1);
+    border-radius: 8px;
 }
 
 th, td {
@@ -259,8 +264,10 @@ th {
 }
 
 tr:hover {
-    background-color: #f8f9fa;
+     background-color: #151b23;
 }
+
+
 
 .project-image {
     width: 60px;
@@ -333,7 +340,7 @@ input[type="number"]:focus {
     transform: translateY(-1px);
 }
 
-/* Responsive Table */
+
 @media (max-width: 992px) {
     .projects-table-container {
         border-radius: 0;
@@ -349,6 +356,7 @@ input[type="number"]:focus {
     
     th, td {
         min-width: 120px;
+        /* color: white; */
     }
     
     .action-buttons {
@@ -457,7 +465,6 @@ background-color: #757575;
     color: #666;
 }
 
-/* Row Styling */
 tr.editing {
     background-color: #f0f7ff !important;
     box-shadow: 0 0 0 1px #4a90e2;
@@ -507,5 +514,24 @@ margin-bottom: 16px;
 @keyframes spin {
 0% { transform: rotate(0deg); }
 100% { transform: rotate(360deg); }
+}
+
+.cursor {
+  display: inline-block;
+  animation: blink 0.7s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+.admin-welcome-text {
+    /* background:#2d2d2d; */
+    padding-top: 2rem;
+    text-align: center;
+    color: var(dark-title-color); /* #4672fe, #351c75*/
+    animation: zoomIn var(--animate-duration) var(--animate-delay);
+   
 }
 

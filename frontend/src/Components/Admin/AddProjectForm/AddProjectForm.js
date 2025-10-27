@@ -106,7 +106,7 @@ const AddProjectForm = ({ onClose, setAddProjectStatus }) => {
 
     return (
         <div className="add-project-form-overlay" onClick={handleClickOutside}>
-            <div className="add-project-form-container">
+            <div className="add-project-form-container common-container">
                 <button className="close-button" onClick={onClose}>&times;</button>
                 <form onSubmit={handleAddProject} className="add-project-form">
                     <h2>Add Project Details</h2>
@@ -121,8 +121,8 @@ const AddProjectForm = ({ onClose, setAddProjectStatus }) => {
                                 <img src={imagePreview} alt="Preview" className="preview-image" />
                             ) : (
                                 <div>
-                                    <div>Click to upload an image</div>
-                                    <div style={{ fontSize: '0.8rem', color: '#666', marginTop: '0.5rem' }}>
+                                    <div className="upload-text">Click to upload an image</div>
+                                    <div style={{ fontSize: '0.8rem', marginTop: '0.5rem' }} className="upload-text">
                                         Recommended size: 800x600px
                                     </div>
                                 </div>

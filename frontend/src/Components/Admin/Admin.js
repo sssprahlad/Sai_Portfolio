@@ -6,6 +6,7 @@ import AddYourDetailsForm from './AddYourDetailsForm/AddYourDetailsForm';
 import { GET_PROJECTS_API, UPDATE_PROJECTS_API,DELETE_PROJECTS_API,GET_MY_DETAILS_API,GET_MY_EXPERIENCE_API,DELETE_MY_EXPERIENCE_API,UPDATE_MY_EXPERIENCE_API    } from "../../constants/Constants";
 import SnackbarPopup from "../../constants/Snackbar";
 import AddExperienceForm from "./AddExperienceForm/AddExperienceForm";  
+import { useSelector } from 'react-redux';
 
 
 const Admin = () => {
@@ -36,7 +37,11 @@ const Admin = () => {
       const [showUpdateDetailsTable, setShowUpdateDetailsTable] = useState(false);
       const [editingExperience, setEditingExperience] = useState(null);
       const [originalExperience, setOriginalExperience] = useState(null);
+      const [text, setText] = useState('');
 
+      const fullText = "Admin";
+
+    const {darkAndLightMode} = useSelector((state) => state.services);
     // const handleLogout = () => {
     //     localStorage.removeItem("token");
     //     navigate("/");
@@ -56,11 +61,11 @@ const Admin = () => {
         switch(activeFilter){
             case "portfolio":
                 setSearchQuery("");
-             setShowAddYourDetails(false);
+                setShowAddYourDetails(false);
                 setShowProjectsTable(false);
                 setShowUpdateDetailsTable(false);
                 setShowExperienceTable(false);
-                fetchProjects();
+                // fetchProjects();
                
                 break;
             case "yourDetails":
@@ -94,13 +99,43 @@ const Admin = () => {
                 break;
         }
     }
+
+
          
+//     useEffect(() => {
+//     let index = 0;
+//     const interval = setInterval(() => {
+//       setText(fullText.slice(0, index + 1));
+//       index++;
+//       if (index === fullText.length) clearInterval(interval);
+//     }, 200);
+
+//     return () => clearInterval(interval);
+//   }, [fullText]);
+
+useEffect(() => {
+    let index = 0;
+
+    const interval = setInterval(() => {
+      setText(fullText.slice(0, index + 1));
+      index++;
+
+      if (index === fullText.length) {
+        setTimeout(() => {
+          index = 0;
+          setText("");
+        }, 1000);
+      }
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, []);
 
 
 
     useEffect(() => {
         fetchProjects();
-    },[searchQuery]);
+    },[showProjectsTable && searchQuery.length > 0]);
 
     useEffect(() => {
         fetchMyDetails();
@@ -109,7 +144,7 @@ const Admin = () => {
 
     useEffect(() => {
         fetchSearchExperience();
-    },[searchQuery]);
+    },[showExperienceTable && searchQuery.length > 0]);
 
 
     const fetchMyDetails = async () => {
@@ -164,7 +199,7 @@ const Admin = () => {
 
     const fetchSearchExperience = async () => {
         try {
-            const response = await fetch(`${GET_MY_EXPERIENCE_API}/search?search=${searchQuery}`,{
+            const response = await fetch(`${GET_MY_EXPERIENCE_API}${showExperienceTable ? "/search?search=" : ""}${searchQuery}`,{
                             method: "GET",
                             headers: {
                                 "Content-Type": "application/json",
@@ -191,7 +226,7 @@ const Admin = () => {
     const fetchProjects = async () => {
         try {
             setLoading(true);
-            const response = await fetch(`${GET_PROJECTS_API}/search?search=${searchQuery}`,{
+            const response = await fetch(`${GET_PROJECTS_API}${showProjectsTable ? "/search?search=" : ""}${searchQuery}`,{
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -222,7 +257,8 @@ const Admin = () => {
 
     const filterProjects = () => {
         return (
-            <div className='admin-header'>
+            <div className='admin-header common-container'>
+                
                 <div className='search-filter-container'>
                     <div className='search-container'>
                         <input 
@@ -508,9 +544,9 @@ const handleSaveProject = async (project) => {
                         </tr>
                     </thead>
                   <tbody>
-  {projects?.rows?.map((project) => (
+  {projects?.rows?.map((project,index) => (
     <tr key={project.id} className={editingId === project.id ? 'editing' : ''}>
-      <td>{project.id}</td>
+      <td style={{color:"white"}}>{index + 1}</td>
 
       <td>
         {editingId === project.id ? (
@@ -618,7 +654,7 @@ const handleSaveProject = async (project) => {
             <table>
                 <thead>
                     <tr>
-                        <th>S.No</th>
+                        <th >S.No</th>
                         <th>Company</th>
                         <th>Position</th>
                         <th>Duration</th>
@@ -633,7 +669,7 @@ const handleSaveProject = async (project) => {
                         
                         return (
                             <tr key={experience.id || index}>
-                                <td>{index + 1}</td>
+                                <td style={{color:"white"}}>{index + 1}</td>
                                 <td>
                                     <input 
                                         readOnly={!isEditing} 
@@ -730,10 +766,16 @@ const handleSaveProject = async (project) => {
   console.log(projects, "projects");
 
     return (
-        <div className='admin-page-container'>
+        <div className={`admin-page-container all-pages-container ${darkAndLightMode ? "dark-bg-parent-container" : "light-bg-parent-container"}`}>
+           
+           <h2  className='admin-welcome-text'>
+             Welcome {text}
+            <span className="cursor">|</span>
+            </h2>
+            
            {filterProjects()}
            {showProjectsTable && projectsTableView()}
-           {showUpdateDetailsTable && <h5 style={{textAlign:"center"}}>You can update your details only</h5>}
+           {showUpdateDetailsTable && <h5 style={{textAlign:"center",paddingBottom:"1rem"}}>You can update your details only</h5>}
            {showExperienceTable && experienceTableView()}
            <SnackbarPopup 
             open={snackbar.open}

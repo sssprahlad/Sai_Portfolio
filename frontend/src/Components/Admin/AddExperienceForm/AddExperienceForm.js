@@ -92,7 +92,7 @@ const AddExperienceForm = ({ onClose, setShowAddExperience }) => {
 
     return (
         <div className="add-project-form-overlay" onClick={handleClickOutside}>
-            <div className="add-project-form-container">
+            <div className="add-project-form-container common-container">
                 <button className="close-button" onClick={onClose}>&times;</button>
                 <form onSubmit={handleAddExperience} className="add-project-form">
                     <h2>Add Experience Details</h2>

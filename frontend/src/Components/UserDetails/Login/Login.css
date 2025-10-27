@@ -5,13 +5,13 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: #f8f9fa;
+    /* background-color: #f8f9fa; */
     padding: 1rem;
     box-sizing: border-box;
 }
 
 .login-form {
-    background-color: #fff;
+    /* background-color: #fff; */
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
@@ -27,13 +27,13 @@
 .login-title {
     text-align: center;
     margin: 0 0 1.5rem 0;
-    color: #333;
+    /* color: #333; */
     font-size: 1.75rem;
 }
 
 .login-form label {
     font-size: 0.95rem;
-    color: #555;
+    /* color: #555; */
     font-weight: 500;
     margin-bottom: -0.75rem;
 }
@@ -90,7 +90,7 @@
 
 .show-password-container label {
     font-size: 0.9rem;
-    color: #666;
+    /* color: #666; */
     cursor: pointer;
     margin: 0;
 }

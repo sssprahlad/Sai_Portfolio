@@ -1,7 +1,7 @@
 import React from 'react';
 import './Navbar.css';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { styled } from '@mui/material/styles';
 
@@ -14,7 +14,8 @@ import { BiErrorCircle } from "react-icons/bi";
 import { GoProjectSymlink } from "react-icons/go";
 import { LuPhoneCall } from "react-icons/lu";
 import { GrUserAdmin } from "react-icons/gr";
-
+import { useSelector, useDispatch } from "react-redux";
+import { setDarkAndLightMode } from "../../redux/reducer/services";
 
 
 
@@ -80,13 +81,19 @@ const Navbar = () => {
     const [darkMode, setDarkMode] = useState(false);
     const navigate = useNavigate();    
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const dispatch = useDispatch();
+    const {darkAndLightMode} = useSelector((state) => state.services);
+    const location = useLocation();
+    console.log(location.pathname,"location.pathname");
 
     const token = localStorage.getItem("token");
     console.log(token);
+    console.log(darkAndLightMode,"darkAndLightMode");
 
 
     const handleThemeChange = () => {
         setDarkMode(!darkMode);
+        dispatch(setDarkAndLightMode(!darkAndLightMode));
     };
     const handleAdminClick = () => {
         navigate("/login")  
@@ -95,6 +102,7 @@ const Navbar = () => {
        setTimeout(() => {
         setMobileMenuOpen(!mobileMenuOpen);
        }, 400);
+      // dispatch(setDarkAndLightMode(!darkAndLightMode));
     }
 
       const handleLogout = () => {
@@ -103,20 +111,18 @@ const Navbar = () => {
     }
 
 
-
-
     return (
       <> 
      
         <div className="navbar-container">
-            <nav className="navbar">
+            <nav className={`navbar ${darkAndLightMode ?  "dark" : "light"}`}>
                 <h1 className="navbar-title">Portfolio</h1>
                 <ul className="ul-nav-list">
-                    <li> <Link className="nav-link" to="/">Home </Link></li>
-                    <li><Link className="nav-link" to="/about">About </Link></li>
-                    <li><Link className="nav-link" to="/projects">Projects </Link></li>
-                    <li><Link className="nav-link" to="/contact">Contact </Link></li>
-                    {token && <li><Link className="nav-link" to="/admin">Admin </Link></li>}
+                    <li> <Link className={`nav-link ${darkAndLightMode ? "dark-link" : "light-link"}`} to="/">Home </Link></li>
+                    <li><Link className={`nav-link ${darkAndLightMode ? "dark-link" : "light-link"}`} to="/about">About </Link></li>
+                    <li><Link className={`nav-link ${darkAndLightMode ? "dark-link" : "light-link"}`} to="/projects">Projects </Link></li>
+                    <li><Link className={`nav-link ${darkAndLightMode ? "dark-link" : "light-link"}`} to="/contact">Contact </Link></li>
+                    {token && <li><Link className={`nav-link ${darkAndLightMode ? "dark-link" : "light-link"}`} to="/admin">Admin </Link></li>}
                     
                 </ul>
                 
@@ -128,9 +134,9 @@ const Navbar = () => {
             </nav>
         </div>
 
-        <div className='mobile-navbar'>
-          <div className='mobile-navbar-header'>
-            <h2>Portfolio</h2>
+        <div className={`mobile-navbar ${darkAndLightMode ? "dark" : "light"}`}>
+          <div className={`mobile-navbar-header ${darkAndLightMode ? "dark" : "light"}`}>
+            <h2 className={darkAndLightMode ? "dark-text" : "light-text"}>Portfolio</h2>
            <div className="admin-part">
                     <MaterialUISwitch checked={darkMode} onChange={handleThemeChange} />
                     {!token ? <button type="button" onClick={handleAdminClick} className="admin-button">Admin</button> : <button className='logout-button' onClick={handleLogout}>Logout</button>}
@@ -142,13 +148,13 @@ const Navbar = () => {
           </div>
           
           {mobileMenuOpen && (
-            <div className="mobile-navbar-menu">
+            <div className={`mobile-navbar-menu ${darkAndLightMode ? "dark" : "light"}`}>
               <ul>
-                <li onClick={handleNavClick}><Link className="nav-link" to="/"> <IoHomeOutline  className='nav-link-icon'/> Home </Link></li>
-                <li onClick={handleNavClick}><Link className="nav-link" to="/about"> <BiErrorCircle className='nav-link-icon'/> About </Link></li>
-                <li onClick={handleNavClick}><Link className="nav-link" to="/projects"> <GoProjectSymlink className='nav-link-icon'/> Projects </Link></li>
-                <li onClick={handleNavClick}><Link className="nav-link" to="/contact"> <LuPhoneCall className='nav-link-icon'/> Contact </Link></li>
-                {token && <li onClick={handleNavClick}><Link className="nav-link" to="/admin"> <GrUserAdmin className='nav-link-icon'/> Admin </Link></li>}
+                <li onClick={handleNavClick}><Link className={`nav-link ${darkAndLightMode ? "dark-link" : "light-link"}`} to="/"> <IoHomeOutline  className='nav-link-icon'/> Home </Link></li>
+                <li onClick={handleNavClick}><Link className={`nav-link ${darkAndLightMode ? "dark-link" : "light-link"}`} to="/about"> <BiErrorCircle className='nav-link-icon'/> About </Link></li>
+                <li onClick={handleNavClick}><Link className={`nav-link ${darkAndLightMode ? "dark-link" : "light-link"}`} to="/projects"> <GoProjectSymlink className='nav-link-icon'/> Projects </Link></li>
+                <li onClick={handleNavClick}><Link className={`nav-link ${darkAndLightMode ? "dark-link" : "light-link"}`} to="/contact"> <LuPhoneCall className='nav-link-icon'/> Contact </Link></li>
+                {token && <li onClick={handleNavClick}><Link className={`nav-link ${darkAndLightMode ? "dark-link" : "light-link"}`} to="/admin"> <GrUserAdmin className='nav-link-icon'/> Admin </Link></li>}
               </ul>
             </div>
           )}

@@ -4,10 +4,12 @@ import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import { LOGIN_API, FETCH_DATA } from "../../../constants/Constants"
 import SnackbarPopup  from "../../../constants/Snackbar";
+import { useSelector } from 'react-redux';
 
 
 const Login = () => {
     const navigate = useNavigate();
+    const {darkAndLightMode} = useSelector((state) => state.services);
     const [showPassword, setShowPassword] = useState(false);
     const [userData, setUserData] = useState({
         email: "",
@@ -74,9 +76,9 @@ const Login = () => {
 
    
     return (
-        <div className="login-container">
+        <div className={`login-container ${darkAndLightMode ? "dark-bg-parent-container" : "light-bg-parent-container"}`}> 
            
-            <form onSubmit={handleSubmit} className="login-form">
+            <form onSubmit={handleSubmit} className="login-form common-container">
                 <h1 className='login-title'>Admin Login</h1>
                 <label htmlFor="email">Email</label>
                 <input type="email" placeholder="Enter Email" value={userData.email} name="email" onChange={handleChangeText} />

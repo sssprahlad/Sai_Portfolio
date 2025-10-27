@@ -8,12 +8,26 @@
     color: #fff;
     width: 100%;
     box-sizing: border-box;
+    /* position:fixed; */
+    /* animation: bounceInDown var(--animate-duration) var(--animate-delay); */
+}
+
+.dark{
+    background:var(--dark-nav-bar);
+    color:var(--dark-text);
+}
+.light{
+    background:var(--light-nav-bar);
+    color:var(--light-text) !important;
+
 }
 
 .navbar-title {
     margin: 0;
     font-size: 1.5rem;
     font-weight: 600;
+     animation: bounceInDown var(--animate-duration) var(--animate-delay);
+   
 }
 
 .ul-nav-list {
@@ -22,13 +36,14 @@
     gap: 2rem;
     margin: 0;
     padding: 0;
+    animation: bounceInDown var(--animate-duration) var(--animate-delay);
 }
 
 .nav-link {
-    color: #fff;
+    /* color: #fff; */
     text-decoration: none;
     font-size: 1rem;
-    font-weight: 500;
+    font-weight: 600;
     transition: color 0.3s ease;
     padding: 0.5rem 0;
     position: relative;
@@ -36,6 +51,20 @@
     align-items: center;
     gap: 1rem;
 }
+
+.dark-link{
+    color:var(--dark-text);
+}
+.light-link{
+    color:var(--light-text);
+}
+.dark-text{
+    color:var(--dark-text);
+}
+.light-text{
+    color:var(--light-text);
+}
+
 
 .nav-link-icon {
     font-size: 1.2rem;
@@ -66,6 +95,7 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+     animation: bounceInDown var(--animate-duration) var(--animate-delay);
 }
 
 .admin-button {
@@ -74,7 +104,7 @@
     border: none;
     padding: 0.5rem 1.25rem;
     border-radius: 4px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -84,7 +114,7 @@
     border: none;
     padding: 0.5rem 1.25rem;
     border-radius: 4px;
-    font-weight: 500;
+    font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
     
@@ -99,7 +129,7 @@
 
 .mobile-navbar {
     display: none;
-    background-color: #333;
+    /* background-color: #333; */
     padding: 1rem;
     position: relative;
     z-index: 1000;
@@ -114,12 +144,12 @@
 
 .mobile-navbar-header h2 {
     margin: 0;
-    color: white;
+    /* color: white; */
     font-size: 1.5rem;
 }
 
 .mobile-navbar-icon {
-    color: white;
+    /* color: white; */
     font-size: 1.8rem;
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -130,7 +160,7 @@
 }
 
 .mobile-navbar-menu {
-    background-color: #2c2c2c;
+    /* background-color: #2c2c2c; */
     position: absolute;
     top: 100%;
     left: 0;
@@ -159,7 +189,7 @@
 .mobile-navbar-menu .nav-link {
     display: block;
     padding: 0.5rem 0;
-    color: #f0f0f0;
+    /* color: #f0f0f0; */
     text-decoration: none;
     transition: color 0.2s ease;
 }

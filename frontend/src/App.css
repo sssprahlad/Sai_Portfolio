@@ -8,4 +8,62 @@ body{
   font-family: 'Poppins', sans-serif;
 }
 
+:root {
+  --animate-duration: 800ms;
+  --animate-delay: 0.3s;
 
+  --bg-dark:#111; /* #111 , #15151d*/
+  --bg-light:#f8f9fa; /*#fce5cd*/
+
+   --light-title-color: #351c75;
+  --dark-title-color:#4672fe;
+
+  --light-sub-title-color: #e69138;
+  --dark-sub-title-color: #e0e0e0;
+
+  --commen-bg-container-color:#2d2d2d;
+
+  --technical-skills-color:#7ec699;
+  --technical-skills-background-color:#cc99cd;
+
+  --light-nav-bar: #f7d7b5  ;    /* #e0e0e0, #f7d7b5 #fce5cd #fce5cd */
+  --dark-nav-bar:#15151d; /* #2d2d2d,  #15151d */
+
+
+
+  --dark-text: #e0e0e0; /* #4672fe */
+  --light-text: #333; /* #351c75 */
+
+  
+  --c-background-dark: #f7d7b5;
+}
+
+
+.all-pages-container{
+  padding: 1.5rem 2.6rem;
+  width: 100%;
+  /* background:var(--bg-light); */
+  /* height: 100vh; */
+
+}
+
+.dark-bg-parent-container{
+  background-color: var(--bg-dark);
+  color: var(--dark-text);
+}
+
+.light-bg-parent-container{
+  background-color: var(--bg-light);
+  color: var(--light-text);
+}
+
+.common-container{
+  width: 100%;
+  background:var(--commen-bg-container-color) ;
+  color: var(--dark-text) !important;
+
+}
+  
+  
+/* table heade color #151b23 */
+/* backgroundColor : #0d1117 */

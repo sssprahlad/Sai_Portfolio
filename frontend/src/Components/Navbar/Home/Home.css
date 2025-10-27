@@ -1,0 +1,7 @@
+.home{
+    display: inline-block;
+  margin: 0 0.5rem;
+  animation: bounce; 
+  animation-duration: 2s;
+    
+}

@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Home.css"
+import {useSelector } from 'react-redux';
 
 const Home = () => {
+    
+    const {darkAndLightMode} = useSelector((state) => state.services);
+
     return (
-        <div>
-            <h1>Home</h1>
+        <div className={`all-pages-container ${darkAndLightMode ? "dark-bg-parent-container" : "light-bg-parent-container"}`}> 
+            <h1 className='home'>Home</h1>
         </div>
     );
 }

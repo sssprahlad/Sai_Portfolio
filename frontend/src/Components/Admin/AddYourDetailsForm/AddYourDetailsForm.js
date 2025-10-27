@@ -3,6 +3,7 @@ import "./AddYourDetailsForm.css"
 import { useState } from "react";
 import { ADD_MY_DETAILS_API, GET_MY_DETAILS_API, FETCH_DATA, API } from "../../../constants/Constants";
 import SnackbarPopup from "../../../constants/Snackbar";
+import { useSelector } from "react-redux";
 
 const AddYourDetailsForm = ({ onClose, getMyDetails, fetchProjects, fetchMyDetails }) => {
     const [yourDetailsData, setYourDetailsData] = useState({
@@ -24,6 +25,7 @@ const AddYourDetailsForm = ({ onClose, getMyDetails, fetchProjects, fetchMyDetai
         
     });
     const [resume, setResume] = useState(null);
+    const {darkAndLightMode} = useSelector((state) => state.services);
 
     console.log(resume,"resume");
 
@@ -162,7 +164,7 @@ const AddYourDetailsForm = ({ onClose, getMyDetails, fetchProjects, fetchMyDetai
 
     return (
         <div className="add-project-form-overlay" onClick={handleClickOutside}>
-            <div className="add-project-form-container">
+            <div className={`add-project-form-container common-container`}>
                 <button className="close-button" onClick={onClose}>&times;</button>
                 <form onSubmit={handleAddUpdateYourDetails} className="add-project-form">
                     <h2>Add Your Details</h2>
