@@ -22,6 +22,7 @@ const AddYourDetailsForm = ({ onClose, getMyDetails, fetchProjects, fetchMyDetai
         frontend: "",
         backend: "",
         database: "",
+        description: "",
         
     });
     const [resume, setResume] = useState(null);
@@ -70,7 +71,9 @@ const AddYourDetailsForm = ({ onClose, getMyDetails, fetchProjects, fetchMyDetai
         }));
     }
 
-    const handleAddUpdateYourDetails = async (e) => {
+
+
+       const handleAddUpdateYourDetails = async (e) => {
         console.log("Form submitted");
     e.preventDefault();
     
@@ -136,6 +139,9 @@ const AddYourDetailsForm = ({ onClose, getMyDetails, fetchProjects, fetchMyDetai
     
 };
 
+
+
+
     const handleCancel = () => {
         onClose();
     }
@@ -167,7 +173,7 @@ const AddYourDetailsForm = ({ onClose, getMyDetails, fetchProjects, fetchMyDetai
             <div className={`add-project-form-container common-container`}>
                 <button className="close-button" onClick={onClose}>&times;</button>
                 <form onSubmit={handleAddUpdateYourDetails} className="add-project-form">
-                    <h2>Add Your Details</h2>
+                    <h2>{getMyDetails?.[0]?.resumeImage ? "Update Your Details" : "Add Your Details"}</h2>
 
                     <div className="form-group">
                         <label htmlFor="name">Name</label>
@@ -386,6 +392,20 @@ const AddYourDetailsForm = ({ onClose, getMyDetails, fetchProjects, fetchMyDetai
                             id="database" 
                             name="database" 
                             value={yourDetailsData.database}
+                            onChange={handleChangeInput}
+                            // required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="description">Description</label>
+                        <textarea
+                            rows="4"
+                            cols="50"
+                            className="text-area"
+                            placeholder="Enter your description"
+                            id="description" 
+                            name="description" 
+                            value={yourDetailsData.description}
                             onChange={handleChangeInput}
                             // required
                         />

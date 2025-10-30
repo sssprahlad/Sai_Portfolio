@@ -5,6 +5,7 @@ const projectsRouter = require("./routes/projectsRouters");
 const myDetailsRouter = require("./routes/myDetailsRouters");
 const authMiddleware = require("./middleware/authMiddleware");
 const myExperienceRouter = require("./routes/myExperienceRouter");
+const mailRouter = require("./routes/mailRouter");
 const cors = require("cors");
 const path = require("path");
 require("dotenv").config();
@@ -30,6 +31,7 @@ app.use("/api", authRouter);
 app.use("/api", projectsRouter);
 app.use("/api", myDetailsRouter);
 app.use("/api", myExperienceRouter);
+app.use("/api", mailRouter);
 
 
 app.get("/api/protected", authMiddleware, (req, res) => {

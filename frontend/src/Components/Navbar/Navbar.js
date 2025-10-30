@@ -15,7 +15,7 @@ import { GoProjectSymlink } from "react-icons/go";
 import { LuPhoneCall } from "react-icons/lu";
 import { GrUserAdmin } from "react-icons/gr";
 import { useSelector, useDispatch } from "react-redux";
-import { setDarkAndLightMode } from "../../redux/reducer/services";
+import { setDarkAndLightMode, setDarkMode } from "../../redux/reducer/services";
 
 
 
@@ -78,21 +78,21 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 
 const Navbar = () => {
-    const [darkMode, setDarkMode] = useState(false);
+    // const [darkMode, setDarkMode] = useState(true); 
     const navigate = useNavigate();    
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const dispatch = useDispatch();
-    const {darkAndLightMode} = useSelector((state) => state.services);
+    const {darkAndLightMode,darkMode} = useSelector((state) => state.services);
     const location = useLocation();
     console.log(location.pathname,"location.pathname");
 
     const token = localStorage.getItem("token");
     console.log(token);
     console.log(darkAndLightMode,"darkAndLightMode");
-
+    console.log(darkMode,"darkMode");
 
     const handleThemeChange = () => {
-        setDarkMode(!darkMode);
+        //dispatch(setDarkMode(!darkMode));
         dispatch(setDarkAndLightMode(!darkAndLightMode));
     };
     const handleAdminClick = () => {
@@ -127,7 +127,7 @@ const Navbar = () => {
                 </ul>
                 
                 <div className="admin-part">
-                    <MaterialUISwitch checked={darkMode} onChange={handleThemeChange} />
+                    <MaterialUISwitch checked={darkAndLightMode} onChange={handleThemeChange} />
                   {!token ? <button type="button" onClick={handleAdminClick} className="admin-button">Admin</button> : <button className='logout-button' onClick={handleLogout}>Logout</button>} 
                 </div>
 
@@ -138,7 +138,7 @@ const Navbar = () => {
           <div className={`mobile-navbar-header ${darkAndLightMode ? "dark" : "light"}`}>
             <h2 className={darkAndLightMode ? "dark-text" : "light-text"}>Portfolio</h2>
            <div className="admin-part">
-                    <MaterialUISwitch checked={darkMode} onChange={handleThemeChange} />
+                    <MaterialUISwitch checked={darkAndLightMode} onChange={handleThemeChange} />
                     {!token ? <button type="button" onClick={handleAdminClick} className="admin-button">Admin</button> : <button className='logout-button' onClick={handleLogout}>Logout</button>}
                 </div>
             <div className="mobile-navbar-icon" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>

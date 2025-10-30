@@ -24,7 +24,7 @@ router.post("/projects", authMiddleware, (req, res) => {
     );
 });
 
-router.get("/projects", authMiddleware, (req, res) => {
+router.get("/projects",  (req, res) => {
     db.all("SELECT * FROM projects", [], (err, rows) => {
         if (err) {
             console.error(err);

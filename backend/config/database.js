@@ -47,7 +47,8 @@ db.run(`
             location TEXT NOT NULL,
             frontend TEXT NOT NULL,
             backend TEXT NOT NULL,
-            database TEXT NOT NULL
+            database TEXT NOT NULL,
+            description TEXT NOT NULL
             
         )
         `);

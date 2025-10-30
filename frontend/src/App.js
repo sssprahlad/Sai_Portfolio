@@ -12,7 +12,7 @@ import ProtectRouter from "./ProtectRoute/ProtectRouter"
 import AddProjectForm from "./Components/Admin/AddProjectForm/AddProjectForm"
 import AddYourDetailsForm from "./Components/Admin/AddYourDetailsForm/AddYourDetailsForm"
 import RegisterForm from "./Components/UserDetails/Register/Register"
-import { useEffect, useState } from 'react';
+import Footer from "./Components/Footer/Footer";
 
 
 function App() {
@@ -45,6 +45,7 @@ function App() {
 
         </Route>
       </Routes>
+      <Footer />
     </Router>
     </div>
   );

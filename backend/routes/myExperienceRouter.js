@@ -47,7 +47,7 @@ router.post("/my-experience",authMiddleware, async (req, res) => {
 });
 
 
-router.get("/my-experience",authMiddleware, async (req, res) => {
+router.get("/my-experience", async (req, res) => {
     try {
         db.all("SELECT * FROM myExperience", [], async (err, experiences) => {
             if (err) {

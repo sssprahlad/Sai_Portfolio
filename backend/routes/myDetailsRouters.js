@@ -7,23 +7,24 @@ const path = require("path");
 const fs = require("fs");
 
 router.post("/my-details", authMiddleware, upload.single("resume"), (req, res) => {
-    const { name, email, phone, address, profileImage, linkedIn, github, twitter, facebook, instagram, whatsapp, location, frontend, backend, database } = req.body;
+    const { name, email, phone, address, profileImage, linkedIn, github, twitter, facebook, instagram, whatsapp, location, frontend, backend, database, description } = req.body;
     console.log(req.body);
     console.log("File received:", req.file);
     console.log("Body received:", req.body);
 
-    if (!req.file || !name || !email || !phone || !address || !profileImage || !linkedIn || !github || !twitter || !facebook || !instagram || !whatsapp || !location || !frontend || !backend || !database) {
+    if (!req.file || !name || !email || !phone || !address || !profileImage || !linkedIn || !github || !twitter || !facebook || !instagram || !whatsapp || !location || !frontend || !backend || !database || !description) {
         return res.status(400).json({ status: 400, message: "All fields are required" });
     }
 
     const resumePath = req.file ? req.file.path : null;
 
     db.run(
-        "INSERT INTO myDetails (name,email,phone,address,profileImage,resume,linkedIn,github,twitter,facebook,instagram,whatsapp,location,frontend,backend,database) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        "INSERT INTO myDetails (name,email,phone,address,profileImage,resume,linkedIn,github,twitter,facebook,instagram,whatsapp,location,frontend,backend,database,description) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
         [name,email,phone,address,profileImage,resumePath,linkedIn,github,twitter,facebook,instagram,whatsapp,location,
             Array.isArray(frontend) ? JSON.stringify(frontend) : JSON.stringify(frontend.split(",")),
             Array.isArray(backend) ? JSON.stringify(backend) : JSON.stringify(backend.split(",")),
             Array.isArray(database) ? JSON.stringify(database) : JSON.stringify(database.split(",")),
+            description
         ],
         function(err) {
             if(err){
@@ -37,7 +38,7 @@ router.post("/my-details", authMiddleware, upload.single("resume"), (req, res) =
 
 
 
-router.get("/my-details", authMiddleware, (req, res) => {
+router.get("/my-details", (req, res) => {
 
     db.all("SELECT * FROM myDetails", [], (err, rows) => {
         if (err) {
@@ -92,9 +93,9 @@ router.get("/my-details", authMiddleware, (req, res) => {
 
 router.patch("/my-details/:id", authMiddleware, upload.single("resume"), (req, res) => {
     const { id } = req.params;
-    const { name, email, phone, address, profileImage, linkedIn, github, twitter, facebook, instagram, whatsapp, location, frontend, backend, database } = req.body;
+    const { name, email, phone, address, profileImage, linkedIn, github, twitter, facebook, instagram, whatsapp, location, frontend, backend, database,description } = req.body;
 
-    if (!name || !email || !phone || !address || !profileImage || !linkedIn || !github || !twitter || !facebook || !instagram || !whatsapp || !location || !frontend || !backend || !database) {
+    if (!name || !email || !phone || !address || !profileImage || !linkedIn || !github || !twitter || !facebook || !instagram || !whatsapp || !location || !frontend || !backend || !database || !description) {
         return res.status(400).json({ status: 400, message: "All fields are required" });
     }
 
@@ -122,9 +123,9 @@ router.patch("/my-details/:id", authMiddleware, upload.single("resume"), (req, r
 
         db.run(
             `UPDATE myDetails 
-             SET name = ?, email = ?, phone = ?, address = ?, profileImage = ?, resume = ?, linkedIn = ?, github = ?, twitter = ?, facebook = ?, instagram = ?, whatsapp = ?, location = ?, frontend = ?, backend = ?, database = ?
+             SET name = ?, email = ?, phone = ?, address = ?, profileImage = ?, resume = ?, linkedIn = ?, github = ?, twitter = ?, facebook = ?, instagram = ?, whatsapp = ?, location = ?, frontend = ?, backend = ?, database = ?, description = ?
              WHERE id = ?`,
-            [
+            [    
                 name,
                 email,
                 phone,
@@ -141,7 +142,8 @@ router.patch("/my-details/:id", authMiddleware, upload.single("resume"), (req, r
                 Array.isArray(frontend) ? JSON.stringify(frontend) : JSON.stringify(frontend.split(",")),
                 Array.isArray(backend) ? JSON.stringify(backend) : JSON.stringify(backend.split(",")),
                 Array.isArray(database) ? JSON.stringify(database) : JSON.stringify(database.split(",")),
-                id
+                description,id
+                
             ],
             function (err) {
                 if (err) {

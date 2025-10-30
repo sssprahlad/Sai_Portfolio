@@ -3,7 +3,7 @@ import './Admin.css';
 import { useNavigate } from 'react-router-dom';
 import AddProjectForm from './AddProjectForm/AddProjectForm';
 import AddYourDetailsForm from './AddYourDetailsForm/AddYourDetailsForm';
-import { GET_PROJECTS_API, UPDATE_PROJECTS_API,DELETE_PROJECTS_API,GET_MY_DETAILS_API,GET_MY_EXPERIENCE_API,DELETE_MY_EXPERIENCE_API,UPDATE_MY_EXPERIENCE_API    } from "../../constants/Constants";
+import { GET_PROJECTS_API, UPDATE_PROJECTS_API, DELETE_PROJECTS_API, GET_MY_DETAILS_API, GET_MY_EXPERIENCE_API, DELETE_MY_EXPERIENCE_API, UPDATE_MY_EXPERIENCE_API } from "../../constants/Constants";
 import SnackbarPopup from "../../constants/Snackbar";
 import AddExperienceForm from "./AddExperienceForm/AddExperienceForm";  
 import { useSelector } from 'react-redux';
@@ -276,7 +276,7 @@ useEffect(() => {
                             onChange={(e) => handleFilterChange(e)}
                         >
                             <option value="portfolio">Portfolio Changes</option>
-                            <option value="yourDetails">Update Your Details</option>
+                            <option value="yourDetails">{getMyDetails?.[0]?.resumeImage ? "Update Your Details" : "Add Your Details"}</option>
                             <option value="project">Add Project</option>
                             <option value="experience">Add Experience</option>
                             {/* <option value="education">Add Education</option> */}
