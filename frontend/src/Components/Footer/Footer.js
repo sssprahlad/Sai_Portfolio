@@ -29,7 +29,7 @@ const Footer = () => {
                 </div>
 
                 <div className="footer-content">
-                    <p>© 2025 Portfolio. All rights reserved.</p>
+                    <p>© {myDetails?.copyRightYear} Sai Prahlad. All rights reserved.</p>
                 </div>
             </div>
         </footer>

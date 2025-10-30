@@ -1,0 +1,219 @@
+.education-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+  align-items: stretch;
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  box-sizing: border-box;
+}
+
+.project-details-child-container {
+  display: flex;
+  flex-direction: column;
+  background: #1e1e1e;
+  /* background: plum; */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 380px;
+}
+
+.project-details-child-container:hover {
+  transform: translateY(-5px);
+  /* box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3); */
+  box-shadow: 0 2px 20px rgba(255, 255, 255, 0.3);
+}
+
+.project-image-container {
+  width: 100%;
+  height: 200px; 
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111; 
+}
+
+.project-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.project-details-child-container:hover img {
+  transform: scale(1.05);
+}
+
+.project-information-container {
+  flex: 1;
+  padding: 1.5rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.project-information-container h1 {
+  font-size: 1.3rem;
+  margin: 0;
+  color: #e6b3ff;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.project-information-container > div span {
+  background: #2e2e2e;
+  color: #fff;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin: 0.2rem;
+  display: inline-block;
+  transition: background 0.3s ease;
+}
+
+.project-information-container > div span:hover {
+  background: #9333ea;
+}
+
+.live-git-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.live-container,
+.git-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.3s ease, transform 0.2s ease;
+  cursor: pointer;
+}
+
+.live-container {
+  background: #a855f7;
+}
+.live-container:hover {
+  background: #9333ea;
+  transform: translateY(-2px);
+}
+.git-container {
+  background: #6366f1;
+}
+.git-container:hover {
+  background: #4f46e5;
+  transform: translateY(-2px);
+}
+
+.live-container h3,
+.git-container h3 {
+  color: #fff;
+  font-size: 0.8rem;
+  font-family: var(--font-family);
+}
+
+@media (max-width: 768px) {
+  .education-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .project-details-child-container {
+    max-width: 100%;
+  }
+
+  .project-image-container {
+    height: 180px;
+  }
+
+  .project-information-container {
+    padding: 1.2rem;
+    text-align: center;
+  }
+
+  .project-information-container h1 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .education-container {
+    grid-template-columns: 1fr;
+  }
+
+  .project-image-container {
+    height: 160px;
+  }
+
+  .project-information-container {
+    padding: 1rem;
+  }
+
+  .project-information-container h1 {
+    font-size: 1rem;
+  }
+}
+
+.filter-title-text{
+    font-size: 1.5rem;
+    color: #e69138;
+}
+@media (max-width: 576px){
+    .filter-title-text{
+        font-size: 1rem;
+    }
+    
+}
+
+.filter-select-container{
+    width: 250px;
+    margin: 0.5rem 0;
+    
+}
+
+.filter-select{
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border-radius: 6px;
+    border: 1px solid black;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+
+.filter-select:hover {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.filter-select::after:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+
+

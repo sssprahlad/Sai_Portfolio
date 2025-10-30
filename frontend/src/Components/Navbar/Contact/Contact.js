@@ -8,6 +8,8 @@ import { TbMailShare } from "react-icons/tb";
 import { FaHouseUser } from "react-icons/fa";
 import {SEND_MAIL_API} from "../../../constants/Constants";
 import SnackbarPopup from "../../../constants/Snackbar";
+import { LuSend } from "react-icons/lu";
+import { Tooltip } from "@mui/material";
 
 
 
@@ -26,26 +28,28 @@ const Contact = () => {
         severity: 'success'
       });
 
+    const [copyTextStatus,setCopyTextStatus] = useState(false);
+
 
 
     const contactDetails = [
     {
         id:1,
         icon: <FaMobileAlt />,
-        title: "Phone",
-        description: myDetails.phone
+        title: "Phone Number",
+        description: myDetails?.phone
     },
     {
         id:2,
         icon: <TbMailShare />,
         title: "Email",
-        description: myDetails.email
+        description: myDetails?.email
     },
     {
         id:3,
         icon: <FaHouseUser />,
         title: "Address",
-        description: myDetails.address
+        description: myDetails?.address
     },
     {
         id:4,
@@ -102,6 +106,49 @@ const Contact = () => {
 
     }
 
+    const handleSnackbarCall = (copy) => {
+        setSnackbar({
+            open: true,
+            message: `Copied! ${copy}`,
+            severity: 'success'
+          });
+    }
+
+    const handleCopy = (copyText) => {
+
+        if(copyText.title === "Phone Number"){
+            navigator.clipboard.writeText(copyText.description);
+            setCopyTextStatus(true);
+                setTimeout(() => {
+                    setCopyTextStatus(false);
+                }, 1000);
+            handleSnackbarCall(copyText.title);
+            
+        }else if(copyText.title === "Email"){
+            navigator.clipboard.writeText(copyText.description);
+            setCopyTextStatus(true);
+            setTimeout(() => {
+                setCopyTextStatus(false);
+            }, 1000);
+            handleSnackbarCall(copyText.title);
+        }else if(copyText.title === "Address"){
+            navigator.clipboard.writeText(copyText.description);
+            setCopyTextStatus(true);
+            setTimeout(() => {
+                setCopyTextStatus(false);
+            }, 1000);
+            handleSnackbarCall(copyText.title);
+        }else if(copyText.title === "Website"){
+            navigator.clipboard.writeText(copyText.description);
+            setCopyTextStatus(true);
+            setTimeout(() => {
+                setCopyTextStatus(false);
+            }, 1000);
+            handleSnackbarCall(copyText.title);
+        }
+        
+    }
+
 
 
     return (
@@ -118,8 +165,8 @@ const Contact = () => {
                     <h2 className='contact-us-text'>Contact Us</h2>
                     <div className='contact-us-container contact-height'>
                         {contactDetails?.map((contact,index) => (
-                          
-                                <div className='contact-alignment' key={index}>
+                          <Tooltip title={`${copyTextStatus ? "Copied" : "Copy"} ${contact.title}`} placement="bottom-end">
+                                <div className='contact-alignment' key={index} onClick={() => {handleCopy(contact)}}>
                                     <div>
                                    {/* <span className='conatct-us-icons'> {contact.icon}</span> */}
                                    {contact.icon}
@@ -128,7 +175,7 @@ const Contact = () => {
                                     <p >{contact.description}</p>
                                     </div>
                                 </div>
-                           
+                            </Tooltip>
                         ))}
                     </div>
                     
@@ -137,22 +184,32 @@ const Contact = () => {
 
 
                  <div className='contact-container1 '>
-                    <h2 className='send-me-text'>Send me a Message</h2>
+                    <h2 className='send-me-text'>Send me a Message</h2> 
                     <div className='contact-us-container'>
                        
-                          
+                                <Tooltip title="Name" placement="bottom-end">
                                 <div className='contact-alignment'>
-                                    <input classNam="contact-input" type="text" placeholder='Name' name="name" onChange={handleContactChange} required />
+                                    <input classNam="contact-input" type="text" placeholder='Enter Your Name' name="name" onChange={handleContactChange} required />
                                 </div>
+                                </Tooltip>
 
-                                 <div className='contact-alignment'>
-                                    
-                                    <input classNam="contact-input" type="text" placeholder='Email' name="email" onChange={handleContactChange} required />              
-                                </div>
+                                <Tooltip title="Email" placement="bottom-end">
                                 <div className='contact-alignment'>
-                                    <textarea  placeholder='Message' cols="11" rows="4" name="message" onChange={handleContactChange} required/>              
+                                    
+                                    <input classNam="contact-input" type="text" placeholder='Enter Your Email' name="email" onChange={handleContactChange} required />              
                                 </div>
-                                <button type="button" className='send-message-btn' onClick={handleSubmitContactDetails}>Send Message</button>
+                                </Tooltip>
+                                <Tooltip title="Message" placement="bottom-end">
+                                <div className='contact-alignment'>
+                                    <textarea  placeholder='Enter Your Message' cols="11" rows="4" name="message" onChange={handleContactChange} required/>              
+                                </div>
+                                </Tooltip>
+                                 <Tooltip title={"Send Message"} placement="bottom-end">
+                                    <div  className='send-message-btn' onClick={handleSubmitContactDetails}>
+                                        <p>Send Message </p>
+                                        <LuSend  className='send-icon'/>
+                                    </div>
+                                </Tooltip>
  
                     </div>
                     <SnackbarPopup open={snackbar.open} message={snackbar.message} severity={snackbar.severity} setSnackbar={setSnackbar}/>
@@ -174,7 +231,7 @@ const Contact = () => {
                     </div>
 
 
-                <iframe src={myDetails.location} width={"100%"} height={"400px"} style={{border:0}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src={myDetails?.location} width={"100%"} height={"400px"} style={{border:0}} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
             </div>
 

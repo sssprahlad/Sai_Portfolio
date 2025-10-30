@@ -25,7 +25,8 @@ db.run(`
         technologies TEXT NOT NULL,
         gitUrl TEXT NOT NULL,
         projectLink TEXT NOT NULL,
-        description TEXT NOT NULL
+        description TEXT NOT NULL,
+        projectCategory TEXT NOT NULL
     )
     `);
 
@@ -48,7 +49,9 @@ db.run(`
             frontend TEXT NOT NULL,
             backend TEXT NOT NULL,
             database TEXT NOT NULL,
-            description TEXT NOT NULL
+            description TEXT NOT NULL,
+            copyRightYear TEXT NOT NULL,
+            portfolioLink TEXT NOT NULL
             
         )
         `);

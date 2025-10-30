@@ -23,6 +23,8 @@ const AddYourDetailsForm = ({ onClose, getMyDetails, fetchProjects, fetchMyDetai
         backend: "",
         database: "",
         description: "",
+        copyRightYear: "",
+        portfolioLink: ""
         
     });
     const [resume, setResume] = useState(null);
@@ -406,6 +408,32 @@ const AddYourDetailsForm = ({ onClose, getMyDetails, fetchProjects, fetchMyDetai
                             id="description" 
                             name="description" 
                             value={yourDetailsData.description}
+                            onChange={handleChangeInput}
+                            // required
+                        />
+                    </div>
+
+                      <div className="form-group">
+                        <label htmlFor="copyRightYear">Copy Right Year</label>
+                        <input 
+                            type="text" 
+                            placeholder="Enter your copy right year"
+                            id="copyRightYear" 
+                            name="copyRightYear" 
+                            value={yourDetailsData.copyRightYear}
+                            onChange={handleChangeInput}
+                            // required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="portfolioLink">My Portfolio Link</label>
+                        <input 
+                            type="text" 
+                            placeholder="Enter your portfolio link"
+                            id="portfolioLink" 
+                            name="portfolioLink" 
+                            value={yourDetailsData.portfolioLink}
                             onChange={handleChangeInput}
                             // required
                         />

@@ -21,7 +21,8 @@
     border-radius: 5px;
     width: 100%;
     min-width: 130px;
-    /* cursor: pointer; */
+    cursor: pointer;
+    
 }
 .pl-2{
     padding: 1.7rem !important;
@@ -126,15 +127,27 @@
 }
 
 .send-message-btn{
-    background-color: #7ec699;
-    color: #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color :#43a047;   
+    /* #fb00ff */
+    color: #fff;
+    font-weight: 600;
     padding: 1rem;
     border-radius: 5px;
     cursor: pointer;
     border: none;
-    color: #ffffff;
-    
+    /* border: 2px solid #ff7900; */
 }
+.send-icon{
+    margin-left: 10px;
+    font-size: 1.3rem !important;
+}
+.send-message-btn:hover{
+    background: #ff7900;
+}
+
 .contact-height{
     height:435px;
     /* background-color: plum; */

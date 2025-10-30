@@ -11,7 +11,8 @@ const AddProjectForm = ({ onClose, setAddProjectStatus }) => {
         technologies: "",
         gitUrl: "",
         projectLink: "",
-        description: ""
+        description: "",
+        projectCategory: ""
     });
 
     const [imagePreview, setImagePreview] = useState("");
@@ -68,7 +69,8 @@ const AddProjectForm = ({ onClose, setAddProjectStatus }) => {
                     technologies: "",
                     githubLink: "",
                     deployedLink: "",
-                    description: ""
+                    description: "",
+                    projectCategory: ""
                 });
                 setAddProjectStatus(true);
             }
@@ -186,6 +188,19 @@ const AddProjectForm = ({ onClose, setAddProjectStatus }) => {
                             value={projectData.projectLink}
                             onChange={handleChangeInput}
                             placeholder="https://your-project-demo.com"
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="projectCategory">Project Category</label>
+                        <input 
+                            type="text" 
+                            id="projectCategory" 
+                            name="projectCategory" 
+                            value={projectData.projectCategory}
+                            onChange={handleChangeInput}
+                            placeholder="e.g. Html, Javascript, React, Mern stack, Java full stack"
                             required
                         />
                     </div>

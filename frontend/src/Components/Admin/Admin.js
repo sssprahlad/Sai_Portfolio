@@ -540,6 +540,7 @@ const handleSaveProject = async (project) => {
                             <th>GitHub Link</th>
                             <th>Live Demo Link</th>
                             <th>Description</th>
+                            <th>Project Category</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -619,6 +620,15 @@ const handleSaveProject = async (project) => {
           readOnly={editingId !== project.id}
           value={editingId === project.id ? (editingProject?.description || '') : project.description}
           onChange={(e) => setEditingProject({ ...editingProject, description: e.target.value })}
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          className={editingId === project.id ? 'editable-input' : 'readonly-input'}
+          readOnly={editingId !== project.id}
+          value={editingId === project.id ? (editingProject?.projectCategory || '') : project.projectCategory}
+          onChange={(e) => setEditingProject({ ...editingProject, projectCategory: e.target.value })}
         />
       </td>
      
