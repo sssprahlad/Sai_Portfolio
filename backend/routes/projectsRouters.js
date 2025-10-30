@@ -13,7 +13,9 @@ router.post("/projects", authMiddleware, (req, res) => {
 
     db.run(
         "INSERT INTO projects (image,title,technologies, gitUrl, projectLink, description) VALUES (?, ?, ?, ?, ?, ?)",
-        [image,title,technologies, gitUrl, projectLink, description],
+        [image,title, gitUrl, projectLink, description,
+            Array.isArray(technologies) ? JSON.stringify(technologies) : JSON.stringify(technologies.split(","))
+        ],
         function (err) {
             if (err) {
                 console.error(err);
@@ -30,7 +32,14 @@ router.get("/projects",  (req, res) => {
             console.error(err);
             return res.status(500).json({ message: "Failed to fetch projects" });
         }
-        res.json({rows, status:200, message:"Projects fetched successfully"});
+
+        const formattedRows = rows.map(row => ({
+            ...row,
+            technologies: JSON.parse(row.technologies),
+        }));
+
+
+        res.json({rows:formattedRows, status:200, message:"Projects fetched successfully"});
     });
 });
 
@@ -50,7 +59,7 @@ router.patch("/projects/:id", authMiddleware, (req, res) => {
     const { image, title, technologies, gitUrl, projectLink, description } = req.body;
     db.run(
         "UPDATE projects SET image = ?, title = ?, technologies = ?, gitUrl = ?, projectLink = ?, description = ? WHERE id = ?",
-        [image, title, technologies, gitUrl, projectLink, description, id],
+        [image, title, Array.isArray(technologies) ? JSON.stringify(technologies) : JSON.stringify(technologies.split(",")), gitUrl, projectLink, description, id],
         (err) => {
             if (err) {
                 console.error(err);
@@ -68,7 +77,11 @@ router.get("/projects/search", authMiddleware, (req, res) => {
             console.error(err);
             return res.status(500).json({ message: "Failed to fetch projects" });
         }
-        res.json({rows, status:200, message:"Projects fetched successfully"});
+        const formattedRows = rows.map(row => ({
+            ...row,
+            technologies: JSON.parse(row.technologies),
+        }));
+        res.json({rows:formattedRows, status:200, message:"Projects fetched successfully"});
     });
 });
 

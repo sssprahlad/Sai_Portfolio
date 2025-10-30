@@ -116,7 +116,7 @@ const Navbar = () => {
      
         <div className="navbar-container">
             <nav className={`navbar ${darkAndLightMode ?  "dark" : "light"}`}>
-                <h1 className="navbar-title">Portfolio</h1>
+                 <h1 onClick={() => navigate("/")} className="navbar-title">Portfolio </h1>
                 <ul className="ul-nav-list">
                     <li> <Link className={`nav-link ${darkAndLightMode ? "dark-link" : "light-link"}`} to="/">Home </Link></li>
                     <li><Link className={`nav-link ${darkAndLightMode ? "dark-link" : "light-link"}`} to="/about">About </Link></li>
@@ -136,7 +136,7 @@ const Navbar = () => {
 
         <div className={`mobile-navbar ${darkAndLightMode ? "dark" : "light"}`}>
           <div className={`mobile-navbar-header ${darkAndLightMode ? "dark" : "light"}`}>
-            <h2 className={darkAndLightMode ? "dark-text" : "light-text"}>Portfolio</h2>
+            <h1 onClick={() => navigate("/")} className="navbar-title">Portfolio </h1>
            <div className="admin-part">
                     <MaterialUISwitch checked={darkAndLightMode} onChange={handleThemeChange} />
                     {!token ? <button type="button" onClick={handleAdminClick} className="admin-button">Admin</button> : <button className='logout-button' onClick={handleLogout}>Logout</button>}
