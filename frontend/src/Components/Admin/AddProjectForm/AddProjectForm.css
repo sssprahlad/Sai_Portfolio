@@ -12,7 +12,7 @@
 }
 
 .add-project-form-container {
-  background: white;
+  /* background: white; */
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
@@ -31,7 +31,7 @@
 
 .add-project-form h2 {
   margin: 0 0 1.5rem 0;
-  color: #333;
+  /* color: #333; */
   text-align: center;
   font-size: 1.5rem;
 }
@@ -44,7 +44,7 @@
 
 .form-group label {
   font-weight: 500;
-  color: #444;
+  /* color: #444; */
   font-size: 0.95rem;
 }
 
@@ -89,6 +89,10 @@
 .file-upload-container:hover {
   border-color: #4a90e2;
   background-color: #f8faff;
+  .upload-text,.file-name{
+    color: var(--light-text) !important;
+  }
+
 }
 
 .file-upload-container input[type="file"] {
@@ -119,6 +123,10 @@
   transition: all 0.2s;
 }
 
+.form-actions button[type="button"]:hover{
+  animation: heartBeat var(--animate-duration) var(--animate-delay);  
+}
+
 .form-actions button[type="submit"] {
   background-color: #4a90e2;
   color: white;
@@ -126,6 +134,7 @@
 
 .form-actions button[type="submit"]:hover {
   background-color: #3a7bc8;
+  animation: flash var(--animate-duration) var(--animate-delay);  
 }
 
 .form-actions button[type="button"] {

@@ -1,6 +1,6 @@
 
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route,useLocation } from 'react-router-dom';
 import Navbar from './Components/Navbar/Navbar';
 import Home from './Components/Navbar/Home/Home';
 import About from './Components/Navbar/About/About';
@@ -12,15 +12,26 @@ import ProtectRouter from "./ProtectRoute/ProtectRouter"
 import AddProjectForm from "./Components/Admin/AddProjectForm/AddProjectForm"
 import AddYourDetailsForm from "./Components/Admin/AddYourDetailsForm/AddYourDetailsForm"
 import RegisterForm from "./Components/UserDetails/Register/Register"
+import Footer from "./Components/Footer/Footer";
 
 
 function App() {
+ 
+
+
+  // if (isLoading) {
+  //   return <div>Loading...</div>;
+  // }
+
+
+
   return (
     <div className="App">
     <Router>
       <Navbar />
       
-      <Routes>
+      <Routes >
+        
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/projects" element={<Projects />} />
@@ -34,6 +45,7 @@ function App() {
 
         </Route>
       </Routes>
+      <Footer />
     </Router>
     </div>
   );

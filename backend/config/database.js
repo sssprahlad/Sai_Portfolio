@@ -25,7 +25,8 @@ db.run(`
         technologies TEXT NOT NULL,
         gitUrl TEXT NOT NULL,
         projectLink TEXT NOT NULL,
-        description TEXT NOT NULL
+        description TEXT NOT NULL,
+        projectCategory TEXT NOT NULL
     )
     `);
 
@@ -47,10 +48,29 @@ db.run(`
             location TEXT NOT NULL,
             frontend TEXT NOT NULL,
             backend TEXT NOT NULL,
-            database TEXT NOT NULL
+            database TEXT NOT NULL,
+            description TEXT NOT NULL,
+            copyRightYear TEXT NOT NULL,
+            portfolioLink TEXT NOT NULL
             
         )
         `);
+
+        db.run(`
+            CREATE TABLE IF NOT EXISTS myExperience (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                company TEXT NOT NULL,
+                position TEXT NOT NULL,
+                duration TEXT NOT NULL  
+            )
+            `);
+
+            db.run(`CREATE TABLE IF NOT EXISTS responsibilities (
+              id INTEGER PRIMARY KEY AUTOINCREMENT,
+              experienceId INTEGER NOT NULL,
+              responsibility TEXT NOT NULL,
+              FOREIGN KEY (experienceId) REFERENCES myExperience(id) ON DELETE CASCADE
+            )`);
 
 
 module.exports = db;

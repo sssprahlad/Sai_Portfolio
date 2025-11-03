@@ -18,6 +18,15 @@ export const GET_MY_DETAILS_API = `${API}/api/my-details`;
 export const UPDATE_MY_DETAILS_API = `${API}/api/my-details`;
 export const DELETE_MY_DETAILS_API = `${API}/api/my-details`;
 
+//My Experience
+export const ADD_MY_EXPERIENCE_API = `${API}/api/my-experience`;
+export const GET_MY_EXPERIENCE_API = `${API}/api/my-experience`;
+export const UPDATE_MY_EXPERIENCE_API = `${API}/api/my-experience`;
+export const DELETE_MY_EXPERIENCE_API = `${API}/api/my-experience`;
+
+//Mail
+export const SEND_MAIL_API = `${API}/api/send-alert`;
+
 export const FETCH_DATA = async (url, method, body) => {
     const response = await fetch(url, {
         method: method,
