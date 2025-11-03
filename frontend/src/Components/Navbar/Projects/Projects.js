@@ -98,7 +98,10 @@ const Projects = () => {
         </div>
 
         <div className="dot-lines">
-          <h2>Showing {`${filterProjects?.length}`} projects</h2>
+          <h2>
+            Showing <span className="total">{`${filterProjects?.length}`}</span>{" "}
+            projects
+          </h2>
         </div>
 
         {/* <div className="filter-discription-container">
@@ -121,9 +124,23 @@ const Projects = () => {
         //   </div> */}
         {/* </div> */}
 
-        <div className="education-container">
+        <div
+          className={
+            filterProjects?.length === 0
+              ? "no-projects-container"
+              : "education-container"
+          }
+        >
           {filterProjects?.length === 0 ? (
-            <p style={{ color: "#e74c3c" }}>No Projects Found</p>
+            <p
+              style={{
+                textAlign: "center",
+                fontSize: "1.2rem",
+                padding: "2rem",
+              }}
+            >
+              No Projects Found
+            </p>
           ) : (
             filterProjects?.map((item) => (
               <div className="project-details-child-container" key={item?.id}>
@@ -221,6 +238,7 @@ const Projects = () => {
           </div>
         )} */}
       </div>
+      {/* <button className="arrow-btn-icon">click</button> */}
     </div>
   );
 };

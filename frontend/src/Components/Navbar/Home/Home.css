@@ -1,18 +1,17 @@
-
-.child-container1{
-    width: 48%;
-    min-width: 300px;
-    min-height: 230px;
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    /* align-items: center;
+.child-container1 {
+  width: 48%;
+  min-width: 300px;
+  min-height: 270px;
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center;
     justify-content: center; */
-    /* background: plum; */
-    gap: 1rem;
-    /* padding: 1rem; */
-    padding: 0rem 1rem 0rem 0rem;
-    /* animation:bounceInLeft var(--animate-duration) var(--animate-delay); */
+  /* background: plum; */
+  gap: 1rem;
+  /* padding: 1rem; */
+  padding: 0rem 1rem 0rem 0rem;
+  /* animation:bounceInLeft var(--animate-duration) var(--animate-delay); */
 }
 
 .child-container2 {
@@ -21,7 +20,7 @@
   align-items: center;
   justify-content: center;
   min-width: 300px;
-  min-height: 230px;
+  min-height: 250px;
   height: 50%;
   padding: 1rem;
   border-radius: 20px;
@@ -45,7 +44,8 @@
   object-fit: cover;
   border-radius: 50%;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-  animation: floatImage 3s ease-in-out infinite, glowPulse 2s ease-in-out infinite;
+  animation: floatImage 3s ease-in-out infinite,
+    glowPulse 2s ease-in-out infinite;
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -55,7 +55,8 @@
 }
 
 @keyframes floatImage {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -63,9 +64,9 @@
   }
 }
 
-
 @keyframes glowPulse {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
   }
   50% {
@@ -91,27 +92,24 @@
   }
   .child-container1 {
     width: 100%;
-    text-align:start;
+    text-align: start;
     min-width: 200px;
   }
-    
 }
 
-
-
-.home-title{
-   letter-spacing:calc(o.1rem + 3px);
-   text-shadow: 1px 2px 7px #48647f;
-   margin-bottom: 1.2rem;
+.home-title {
+  letter-spacing: calc(o.1rem + 3px);
+  text-shadow: 1px 2px 7px #48647f;
+  /* margin-bottom: 1.2rem; */
   animation: 1s linear 0s 1 normal none running letterSpacingAnimation;
   font-family: "Kaushan Script", cursive;
 }
-.home-sub-title{
-    font-size: 1rem;
-    font-weight: bold;
-    color: var(--dark-title-color);
+.home-sub-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--dark-title-color);
 }
-.more-about-btn{
+.more-about-btn {
   padding: 1rem 2rem;
   background-color: var(--dark-title-color);
   color: var(--dark-text) !important;
@@ -121,47 +119,45 @@
   width: 100%;
 }
 
-.more-about-btn:hover{
-    /* animation: jello var(--animate-duration) var(--animate-delay) ease-in-out; */
-     background-color: #3a7bc8;
-     transition: all 0.3s ease-in-out;
-     transform: scale(1.05);
-     background: green;
+.more-about-btn:hover {
+  /* animation: jello var(--animate-duration) var(--animate-delay) ease-in-out; */
+  background-color: #3a7bc8;
+  transition: all 0.3s ease-in-out;
+  transform: scale(1.05);
+  background: green;
 }
 
 @keyframes letterSpacingAnimation {
-    0% {
-        letter-spacing: 10px;
-        opacity: 0;
-    }
-    100% {
-        letter-spacing: calc(0.1rem + 3px);
-           opacity: 1;
-    }
+  0% {
+    letter-spacing: 10px;
+    opacity: 0;
+  }
+  100% {
+    letter-spacing: calc(0.1rem + 3px);
+    opacity: 1;
+  }
 }
 
-.social-media-container{
+.social-media-container {
   display: flex;
   align-items: start;
   /* justify-content: center; */
 }
-.social-media-container ul{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+.social-media-container ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
-.social-media-container ul li{
-    list-style: none;
+.social-media-container ul li {
+  list-style: none;
 }
-.social-media-icon{
-    font-size: 1.5rem;
+.social-media-icon {
+  font-size: 1.5rem;
 }
-.social-media-icon:hover{
-    animation: jello var(--animate-duration) var(--animate-delay) ease-in-out;
-    /* transition: all 0.3s ease-in-out;
+.social-media-icon:hover {
+  animation: jello var(--animate-duration) var(--animate-delay) ease-in-out;
+  /* transition: all 0.3s ease-in-out;
     transform: scale(1.05); */
-    color: var(--light-sub-title-color);
-
+  color: var(--light-sub-title-color);
 }
-

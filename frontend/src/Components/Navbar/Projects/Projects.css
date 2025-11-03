@@ -9,6 +9,12 @@
   margin: 20px auto;
   box-sizing: border-box;
 }
+.no-projects-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 
 .project-details-child-container {
   display: flex;
@@ -247,6 +253,7 @@
   width: 100%;
   gap: 1rem;
   text-align: center;
+  color: #7ec699;
   /* background: plum; */
 }
 
@@ -261,3 +268,22 @@
 /* .dot-lines::after {
   content: "<--------";
 } */
+
+.total {
+  color: #fff;
+}
+
+.arrow-btn-icon {
+  position: fixed;
+  bottom: 30px;
+  right: 70px;
+  z-index: 1000;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+}
