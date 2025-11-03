@@ -21,12 +21,18 @@ const Home = () => {
     },[])
 
     const fetchMyDetails = async () => {
+       try{
         const response = await fetch(GET_MY_DETAILS_API);
         if(response.status === 200){
             const data = await response.json();
             setGetMyDetails(data?.rows?.[0]);
             dispatch(setMyDetails(data?.rows?.[0]));
         }
+       }
+       catch(error){
+        console.log(error);
+        setGetMyDetails([]);
+       }
     }
 
     return (

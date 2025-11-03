@@ -5,8 +5,6 @@ const authMiddleware = require("../middleware/authMiddleware");
 
 
 
-
-
 router.post("/projects", (req,res) => {
     const {image,title,technologies,gitUrl,projectLink,description,projectCategory} = req.body;
     console.log(req.body);

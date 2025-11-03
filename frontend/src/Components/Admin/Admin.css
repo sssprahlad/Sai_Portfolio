@@ -246,6 +246,9 @@ table {
     background-color: var(--bg-dark);
     box-shadow: 0 2px 20px rgba(255, 255, 255, 0.3);
     border-radius: 8px;
+    overflow-x: auto !important;
+    min-width: 100%;
+    
 }
 
 th, td {

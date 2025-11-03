@@ -47,11 +47,17 @@ const About = () => {
     },[])
 
      const fetchExperience = async () => {
+           try{
             const response = await fetch(GET_MY_EXPERIENCE_API);
             if(response.status === 200){
                 const data = await response.json();
                 setExperience(data?.data);
             }
+           }
+           catch(error){
+            console.log(error);
+            setExperience([]);
+           }
         }
 
 
