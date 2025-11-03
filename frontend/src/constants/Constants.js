@@ -1,7 +1,5 @@
-
-
-
-export const API = "http://localhost:5000";
+export const API =
+  "https://sai-portfolio-ngsu.onrender.com" || "http://localhost:5000";
 
 export const LOGIN_API = `${API}/api/login`;
 export const REGISTER_API = `${API}/api/register`;
@@ -28,17 +26,13 @@ export const DELETE_MY_EXPERIENCE_API = `${API}/api/my-experience`;
 export const SEND_MAIL_API = `${API}/api/send-alert`;
 
 export const FETCH_DATA = async (url, method, body) => {
-    const response = await fetch(url, {
-        method: method,
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${localStorage.getItem("token")}`
-        },
-        body: JSON.stringify(body),
-    });
-    return response.json();
+  const response = await fetch(url, {
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify(body),
+  });
+  return response.json();
 };
-
-
-
-

@@ -21,7 +21,7 @@ const app = express();
 // }));
 
 const allowedOrigins = [
-  // 'https://th-works-task-manager.vercel.app',
+  "https://sai-portfolio-tawny.vercel.app",
   "http://localhost:3000",
 ];
 
