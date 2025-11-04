@@ -8,6 +8,7 @@ import { FaLinkedin } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
 import { GET_MY_DETAILS_API } from "../../../constants/Constants";
 import { useDispatch } from "react-redux";
+import Tooltip from "@mui/material/Tooltip";
 import { setMyDetails } from "../../../redux/reducer/services";
 
 const Home = () => {
@@ -16,6 +17,9 @@ const Home = () => {
   const { darkAndLightMode, myDetails } = useSelector(
     (state) => state.services
   );
+
+  const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   useEffect(() => {
     fetchMyDetails();
@@ -23,6 +27,7 @@ const Home = () => {
 
   const fetchMyDetails = async () => {
     try {
+      setLoading(true);
       const response = await fetch(GET_MY_DETAILS_API);
       if (response.status === 200) {
         const data = await response.json();
@@ -32,6 +37,8 @@ const Home = () => {
     } catch (error) {
       console.log(error);
       setGetMyDetails([]);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -98,20 +105,26 @@ const Home = () => {
               </li>
             </ul>
           </div>
-          <button
-            type="button"
-            className="more-about-btn"
-            onClick={() => navigate("/about")}
-          >
-            More About Me
-          </button>
+          <Tooltip title="More About Me">
+            <button
+              type="button"
+              className="more-about-btn"
+              onClick={() => navigate("/about")}
+            >
+              More About Me
+            </button>
+          </Tooltip>
         </div>
         <div className="child-container2 common-container">
-          <img
-            className="profile-image"
-            src={getMyDetails?.profileImage}
-            alt="image"
-          />
+          {loading ? (
+            <div className="spinner"></div>
+          ) : (
+            <img
+              className="profile-image"
+              src={getMyDetails?.profileImage}
+              alt="image"
+            />
+          )}
         </div>
       </div>
     </div>

@@ -6,6 +6,8 @@ import { GET_PROJECTS_API, API } from "../../../constants/Constants";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { GoProjectSymlink } from "react-icons/go";
 import { GrProjects } from "react-icons/gr";
+import { FaArrowUp } from "react-icons/fa";
+import Tooltip from "@mui/material/Tooltip";
 
 const Projects = () => {
   const { darkAndLightMode } = useSelector((state) => state.services);
@@ -14,6 +16,8 @@ const Projects = () => {
   const [searchQuery, setSearchQuery] = useState("all");
   const [projectsView, setProjectsView] = useState(true);
   const [descriptionView, setDescriptionView] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     fetchProjects();
@@ -21,14 +25,17 @@ const Projects = () => {
 
   const fetchProjects = async () => {
     try {
+      setLoading(true);
       const response = await fetch(GET_PROJECTS_API);
       if (response.status === 200) {
         const data = await response.json();
         setGetProjects(data?.rows);
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
       setGetProjects([]);
+      setLoading(false);
     }
   };
 
@@ -65,6 +72,20 @@ const Projects = () => {
     setProjectsView(false);
     setDescriptionView(true);
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 400) {
+        setVisible(true);
+      } else {
+        setVisible(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
     <div
@@ -141,6 +162,8 @@ const Projects = () => {
             >
               No Projects Found
             </p>
+          ) : loading ? (
+            <div className="spinner"> </div>
           ) : (
             filterProjects?.map((item) => (
               <div className="project-details-child-container" key={item?.id}>
@@ -155,20 +178,24 @@ const Projects = () => {
                     ))}
                   </div>
                   <div className="live-git-container">
-                    <div
-                      className="live-container"
-                      onClick={() => handleProjectViews(item?.projectLink)}
-                    >
-                      <h3>Live</h3>
-                      <FaExternalLinkAlt />
-                    </div>
-                    <div
-                      className="git-container"
-                      onClick={() => handleProjectViews(item?.gitUrl)}
-                    >
-                      <h3>Git</h3>
-                      <FaExternalLinkAlt />
-                    </div>
+                    <Tooltip title="Go to live">
+                      <div
+                        className="live-container"
+                        onClick={() => handleProjectViews(item?.projectLink)}
+                      >
+                        <h3>Live</h3>
+                        <FaExternalLinkAlt />
+                      </div>
+                    </Tooltip>
+                    <Tooltip title="Go to git">
+                      <div
+                        className="git-container"
+                        onClick={() => handleProjectViews(item?.gitUrl)}
+                      >
+                        <h3>Git</h3>
+                        <FaExternalLinkAlt />
+                      </div>
+                    </Tooltip>
                   </div>
                 </div>
               </div>
@@ -238,7 +265,12 @@ const Projects = () => {
           </div>
         )} */}
       </div>
-      {/* <button className="arrow-btn-icon">click</button> */}
+      <div
+        className={visible ? "arrow-btn-icon" : "hide-arrow-btn"}
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      >
+        <FaArrowUp size={20} />
+      </div>
     </div>
   );
 };

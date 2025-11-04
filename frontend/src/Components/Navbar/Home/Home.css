@@ -33,6 +33,13 @@
   animation: bounceInRight var(--animate-duration) var(--animate-delay);
 }
 
+@media (max-width:912px){
+  .child-container1,
+  .child-container2{
+    width: 100%;
+  }
+}
+
 .child-container2:hover {
   transform: scale(1.05);
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.4);

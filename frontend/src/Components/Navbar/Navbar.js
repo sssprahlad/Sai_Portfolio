@@ -16,6 +16,7 @@ import { LuPhoneCall } from "react-icons/lu";
 import { GrUserAdmin } from "react-icons/gr";
 import { useSelector, useDispatch } from "react-redux";
 import { setDarkAndLightMode, setDarkMode } from "../../redux/reducer/services";
+import Tooltip from "@mui/material/Tooltip";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -110,7 +111,13 @@ const Navbar = () => {
     <>
       <div className="navbar-container">
         <nav className={`navbar ${darkAndLightMode ? "dark" : "light"}`}>
-          <h1 onClick={() => navigate("/")} className="navbar-title">
+          <h1
+            onClick={() => {
+              navigate("/");
+              setMobileMenuOpen(false);
+            }}
+            className="navbar-title"
+          >
             Portfolio{" "}
           </h1>
           <ul className="ul-nav-list">
@@ -178,22 +185,28 @@ const Navbar = () => {
           </ul>
 
           <div className="admin-part">
-            <MaterialUISwitch
-              checked={darkAndLightMode}
-              onChange={handleThemeChange}
-            />
+            <Tooltip title={darkAndLightMode ? "Light" : "Dark"}>
+              <MaterialUISwitch
+                checked={darkAndLightMode}
+                onChange={handleThemeChange}
+              />
+            </Tooltip>
             {!token ? (
-              <button
-                type="button"
-                onClick={handleAdminClick}
-                className="admin-button"
-              >
-                Admin
-              </button>
+              <Tooltip title="Admin">
+                <button
+                  type="button"
+                  onClick={handleAdminClick}
+                  className="admin-button"
+                >
+                  Admin
+                </button>
+              </Tooltip>
             ) : (
-              <button className="logout-button" onClick={handleLogout}>
-                Logout
-              </button>
+              <Tooltip title="Logout">
+                <button className="logout-button" onClick={handleLogout}>
+                  Logout
+                </button>
+              </Tooltip>
             )}
           </div>
         </nav>
@@ -205,34 +218,48 @@ const Navbar = () => {
             darkAndLightMode ? "dark" : "light"
           }`}
         >
-          <h1 onClick={() => navigate("/")} className="navbar-title">
+          <h1
+            onClick={() => {
+              navigate("/");
+              setMobileMenuOpen(false);
+            }}
+            className="navbar-title"
+          >
             Portfolio{" "}
           </h1>
           <div className="admin-part">
-            <MaterialUISwitch
-              checked={darkAndLightMode}
-              onChange={handleThemeChange}
-            />
+            <Tooltip title={darkAndLightMode ? "Light" : "Dark"}>
+              <MaterialUISwitch
+                checked={darkAndLightMode}
+                onChange={handleThemeChange}
+              />
+            </Tooltip>
             {!token ? (
-              <button
-                type="button"
-                onClick={handleAdminClick}
-                className="admin-button"
-              >
-                Admin
-              </button>
+              <Tooltip title="Admin">
+                <button
+                  type="button"
+                  onClick={handleAdminClick}
+                  className="admin-button"
+                >
+                  Admin
+                </button>
+              </Tooltip>
             ) : (
-              <button className="logout-button" onClick={handleLogout}>
-                Logout
-              </button>
+              <Tooltip title="Logout">
+                <button className="logout-button" onClick={handleLogout}>
+                  Logout
+                </button>
+              </Tooltip>
             )}
           </div>
-          <div
-            className="mobile-navbar-icon"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? <MdOutlineCancel /> : <GiHamburgerMenu />}
-          </div>
+          <Tooltip title={mobileMenuOpen ? "Close" : "Menu"}>
+            <div
+              className="mobile-navbar-icon"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <MdOutlineCancel /> : <GiHamburgerMenu />}
+            </div>
+          </Tooltip>
         </div>
 
         {mobileMenuOpen && (

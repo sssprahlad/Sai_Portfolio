@@ -71,6 +71,7 @@
 
 .nav-link:hover {
   color: #4a90e2;
+  color: #fff;
 }
 
 .nav-link::after {
@@ -209,6 +210,7 @@
 
 .mobile-navbar-menu .nav-link:hover {
   color: #4a90e2;
+  color: #fff;
 }
 
 @keyframes slideDown {

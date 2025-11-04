@@ -278,12 +278,39 @@
   bottom: 30px;
   right: 70px;
   z-index: 1000;
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: #fff;
+  background: #07777f !important;
+  cursor: pointer;
+  /* color: black; */
+  /* color: #8b5cf6; */
   border: none;
+  animation: 3s linear 0s infinite alternate none running bounceAnimation;
+}
+
+@keyframes bounceAnimation {
+  0% {
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+.hide {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .arrow-btn-icon {
+    bottom: 20px;
+    right: 40px;
+  }
 }
