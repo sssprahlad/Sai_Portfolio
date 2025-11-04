@@ -26,7 +26,6 @@ router.post("/send-alert", async (req, res) => {
 
   const mailOptions = {
     from: process.env.GMAIL_USER,
-    replyTo: email,
     to: "k.sssprahlad@gmail.com",
     subject: `Sai Prahlad — Message from ${name}`,
     html: `

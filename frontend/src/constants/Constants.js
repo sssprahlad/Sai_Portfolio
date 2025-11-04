@@ -1,5 +1,5 @@
-export const API = "http://localhost:5000";
-// "https://sai-portfolio-ngsu.onrender.com" || "http://localhost:5000";
+export const API =
+  "https://sai-portfolio-ngsu.onrender.com" || "http://localhost:5000";
 
 export const LOGIN_API = `${API}/api/login`;
 export const REGISTER_API = `${API}/api/register`;
