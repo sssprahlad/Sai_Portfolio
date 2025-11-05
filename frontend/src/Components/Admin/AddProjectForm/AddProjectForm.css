@@ -54,6 +54,7 @@
   border-radius: 6px;
   font-size: 1rem;
   transition: border-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
 }
 
 .form-group input[type="text"]:focus {
@@ -68,6 +69,7 @@
   border-radius: 6px;
   font-size: 1rem;
   transition: border-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
 }
 
 .form-group input[type="url"]:focus {
@@ -89,10 +91,10 @@
 .file-upload-container:hover {
   border-color: #4a90e2;
   background-color: #f8faff;
-  .upload-text,.file-name{
+  .upload-text,
+  .file-name {
     color: var(--light-text) !important;
   }
-
 }
 
 .file-upload-container input[type="file"] {
@@ -123,8 +125,8 @@
   transition: all 0.2s;
 }
 
-.form-actions button[type="button"]:hover{
-  animation: heartBeat var(--animate-duration) var(--animate-delay);  
+.form-actions button[type="button"]:hover {
+  animation: heartBeat var(--animate-duration) var(--animate-delay);
 }
 
 .form-actions button[type="submit"] {
@@ -134,7 +136,7 @@
 
 .form-actions button[type="submit"]:hover {
   background-color: #3a7bc8;
-  animation: flash var(--animate-duration) var(--animate-delay);  
+  animation: flash var(--animate-duration) var(--animate-delay);
 }
 
 .form-actions button[type="button"] {
@@ -162,11 +164,12 @@
 .close-button:hover {
   color: #333;
 }
-.text-area{
-    width: 100%;
-    padding: 0.75rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.3s, box-shadow 0.3s;
+.text-area {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  cursor: pointer;
 }

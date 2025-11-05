@@ -48,6 +48,7 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  cursor: pointer;
 }
 
 .search-input:focus,
@@ -92,6 +93,10 @@
   font-size: 0.7em;
   opacity: 0.6;
   pointer-events: none;
+}
+
+.filter-container select option {
+  cursor: pointer !important;
 }
 
 .add-user-button {
@@ -296,6 +301,7 @@ input[type="number"] {
   border-radius: 4px;
   font-size: 0.9rem;
   transition: border-color 0.2s;
+  cursor: pointer;
 }
 
 input[type="text"]:focus,
@@ -327,11 +333,13 @@ input[type="number"]:focus {
 .edit-btn {
   background-color: #3498db;
   color: white;
+  cursor: pointer;
 }
 
 .delete-btn {
   background-color: #e74c3c;
   color: white;
+  cursor: pointer;
 }
 
 .edit-btn:hover {
@@ -396,6 +404,7 @@ input[type="number"]:focus {
   transform: translateY(-1px);
   transition: all 0.2s ease;
   padding: 0.5rem 0.75rem;
+  cursor: pointer;
 }
 
 .btn-edit:hover {
@@ -410,6 +419,7 @@ input[type="number"]:focus {
   transform: translateY(-1px);
   transition: all 0.2s ease;
   padding: 0.5rem 0.75rem;
+  cursor: pointer;
 }
 
 .btn-delete:hover {
@@ -426,6 +436,7 @@ input[type="number"]:focus {
   padding: 0.5rem 1.2rem;
   border-radius: 4px;
   border: none;
+  cursor: pointer;
 }
 
 .btn-save:hover {
@@ -442,6 +453,7 @@ input[type="number"]:focus {
   transform: translateY(-1px);
   transition: all 0.2s ease;
   padding: 0.5rem 0.75rem;
+  cursor: pointer;
 }
 
 .btn-cancel:hover {
@@ -457,6 +469,7 @@ input[type="number"]:focus {
   background-color: #fff;
   box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
   transition: all 0.2s ease;
+  cursor: pointer;
 }
 
 .readonly-input {
