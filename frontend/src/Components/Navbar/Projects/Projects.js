@@ -153,17 +153,19 @@ const Projects = () => {
           }
         >
           {filterProjects?.length === 0 ? (
-            <p
-              style={{
-                textAlign: "center",
-                fontSize: "1.2rem",
-                padding: "2rem",
-              }}
-            >
-              No Projects Found
-            </p>
-          ) : loading ? (
-            <div className="spinner"> </div>
+            loading ? (
+              <div className="spinner"> </div>
+            ) : (
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "1.2rem",
+                  padding: "2rem",
+                }}
+              >
+                No Projects Found
+              </p>
+            )
           ) : (
             filterProjects?.map((item) => (
               <div className="project-details-child-container" key={item?.id}>

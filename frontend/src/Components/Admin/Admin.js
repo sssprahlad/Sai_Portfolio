@@ -17,6 +17,7 @@ import AddExperienceForm from "./AddExperienceForm/AddExperienceForm";
 import { useSelector } from "react-redux";
 import { FaArrowUp } from "react-icons/fa";
 import Tooltip from "@mui/material/Tooltip";
+import { CircularProgress } from "@mui/material";
 
 const Admin = () => {
   const [filter, setFilter] = useState("");
@@ -48,6 +49,7 @@ const Admin = () => {
   const [originalExperience, setOriginalExperience] = useState(null);
   const [text, setText] = useState("");
   const [visible, setVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fullText = "Admin";
 
@@ -192,6 +194,7 @@ const Admin = () => {
   console.log(getMyDetails[0]?.resumeImage, "getImage");
 
   const fetchExperience = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(`${GET_MY_EXPERIENCE_API}`, {
         method: "GET",
@@ -202,15 +205,18 @@ const Admin = () => {
       });
       if (response.status === 200) {
         const data = await response.json();
+        setIsLoading(false);
         setGetExperience(data?.data);
         console.log(data, "data.rows");
       }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
   const fetchSearchExperience = async () => {
+    setIsLoading(true);
     try {
       const response = await fetch(
         `${GET_MY_EXPERIENCE_API}${
@@ -228,10 +234,12 @@ const Admin = () => {
       if (response.status === 200) {
         const data = await response.json();
         setGetExperience(data?.data);
+        setIsLoading(false);
         console.log(data, "data.rows");
       }
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
@@ -239,6 +247,7 @@ const Admin = () => {
 
   const fetchProjects = async () => {
     try {
+      setIsLoading(true);
       setLoading(true);
       const response = await fetch(
         `${GET_PROJECTS_API}${
@@ -256,6 +265,7 @@ const Admin = () => {
       if (response.status === 200) {
         const data = await response.json();
         setProjects(data);
+        setIsLoading(false);
         setSnackbar({
           open: true,
           message: data.message,
@@ -331,6 +341,7 @@ const Admin = () => {
             <AddProjectForm
               onClose={() => setShowAddProject(false)}
               setAddProjectStatus={setAddProjectStatus}
+              fetchProjects={fetchProjects}
             />
           )}
         </div>
@@ -470,6 +481,7 @@ const Admin = () => {
 
   const handleSaveExperience = async (experience) => {
     try {
+      setLoading(true);
       const experienceToUpdate = {
         ...editingExperience,
         responsibilities: editingExperience.responsibilities,
@@ -495,10 +507,12 @@ const Admin = () => {
           message: data.message || "Experience updated successfully",
           severity: "success",
         });
+        setLoading(false);
         setEditingExperienceId(null);
         setEditingExperience(null);
         fetchExperience();
       } else {
+        setLoading(false);
         throw new Error(data.message || "Failed to update experience");
       }
     } catch (error) {
@@ -508,11 +522,13 @@ const Admin = () => {
         message: error.message,
         severity: "error",
       });
+      setLoading(false);
     }
   };
 
   const handleSaveProject = async (project) => {
     try {
+      setLoading(true);
       const response = await fetch(`${UPDATE_PROJECTS_API}/${project.id}`, {
         method: "PATCH",
         headers: {
@@ -525,6 +541,7 @@ const Admin = () => {
       const data = await response.json();
 
       if (response.ok) {
+        setLoading(false);
         setSnackbar({
           open: true,
           message: data.message || "Project updated successfully",
@@ -535,6 +552,7 @@ const Admin = () => {
         fetchProjects();
       } else {
         throw new Error(data.message || "Failed to update project");
+        setLoading(false);
       }
     } catch (error) {
       console.error("Update error:", error);
@@ -543,6 +561,7 @@ const Admin = () => {
         message: error.message,
         severity: "error",
       });
+      setLoading(false);
     }
   };
 
@@ -570,350 +589,201 @@ const Admin = () => {
   const projectsTableView = () => {
     return (
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>S.No</th>
-              <th>Image</th>
-              <th>Title</th>
-              <th>Technologies</th>
-              <th>GitHub Link</th>
-              <th>Live Demo Link</th>
-              <th>Description</th>
-              <th>Project Category</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {projects?.rows?.map((project, index) => (
-              <tr
-                key={project.id}
-                className={editingId === project.id ? "editing" : ""}
-              >
-                <td style={{ color: "white" }}>{index + 1}</td>
-
-                <td>
-                  {editingId === project.id ? (
-                    <>
-                      <input
-                        type="file"
-                        onChange={handleFileChange}
-                        className="file-input"
-                        id={`file-input-${project.id}`}
-                      />
-                      <label htmlFor={`file-input-${project.id}`}>
-                        <img
-                          src={imagePreview || project.image}
-                          alt={project.title}
-                          style={{
-                            width: "100px",
-                            height: "100px",
-                            objectFit: "cover",
-                          }}
-                          className="preview-image"
-                        />
-                      </label>
-                    </>
-                  ) : (
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      style={{
-                        width: "100px",
-                        height: "100px",
-                        objectFit: "cover",
-                      }}
-                      className="preview-image"
-                    />
-                  )}
-                </td>
-
-                <td>
-                  <input
-                    type="text"
-                    className={
-                      editingId === project.id
-                        ? "editable-input"
-                        : "readonly-input"
-                    }
-                    readOnly={editingId !== project.id}
-                    value={
-                      editingId === project.id
-                        ? editingProject?.title || ""
-                        : project.title
-                    }
-                    onChange={(e) =>
-                      setEditingProject({
-                        ...editingProject,
-                        title: e.target.value,
-                      })
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    className={
-                      editingId === project.id
-                        ? "editable-input"
-                        : "readonly-input"
-                    }
-                    readOnly={editingId !== project.id}
-                    value={
-                      editingId === project.id
-                        ? editingProject?.technologies || ""
-                        : project.technologies
-                    }
-                    onChange={(e) =>
-                      setEditingProject({
-                        ...editingProject,
-                        technologies: e.target.value,
-                      })
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    className={
-                      editingId === project.id
-                        ? "editable-input"
-                        : "readonly-input"
-                    }
-                    readOnly={editingId !== project.id}
-                    value={
-                      editingId === project.id
-                        ? editingProject?.gitUrl || ""
-                        : project.gitUrl
-                    }
-                    onChange={(e) =>
-                      setEditingProject({
-                        ...editingProject,
-                        gitUrl: e.target.value,
-                      })
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    className={
-                      editingId === project.id
-                        ? "editable-input"
-                        : "readonly-input"
-                    }
-                    readOnly={editingId !== project.id}
-                    value={
-                      editingId === project.id
-                        ? editingProject?.projectLink || ""
-                        : project.projectLink
-                    }
-                    onChange={(e) =>
-                      setEditingProject({
-                        ...editingProject,
-                        projectLink: e.target.value,
-                      })
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    className={
-                      editingId === project.id
-                        ? "editable-input"
-                        : "readonly-input"
-                    }
-                    readOnly={editingId !== project.id}
-                    value={
-                      editingId === project.id
-                        ? editingProject?.description || ""
-                        : project.description
-                    }
-                    onChange={(e) =>
-                      setEditingProject({
-                        ...editingProject,
-                        description: e.target.value,
-                      })
-                    }
-                  />
-                </td>
-                <td>
-                  <input
-                    type="text"
-                    className={
-                      editingId === project.id
-                        ? "editable-input"
-                        : "readonly-input"
-                    }
-                    readOnly={editingId !== project.id}
-                    value={
-                      editingId === project.id
-                        ? editingProject?.projectCategory || ""
-                        : project.projectCategory
-                    }
-                    onChange={(e) =>
-                      setEditingProject({
-                        ...editingProject,
-                        projectCategory: e.target.value,
-                      })
-                    }
-                  />
-                </td>
-
-                <td>
-                  {editingId === project.id ? (
-                    <div
-                      style={{
-                        display: "flex",
-                        gap: "0.5rem",
-                        margin: "0 auto",
-                        padding: "0px",
-                      }}
-                    >
-                      <Tooltip title="Save">
-                        <button
-                          className="btn-save"
-                          onClick={() => handleSaveProject(project)}
-                        >
-                          Save
-                        </button>
-                      </Tooltip>
-                      <Tooltip title="Cancel">
-                        <button
-                          className="btn-cancel"
-                          onClick={handleCancelEditProject}
-                        >
-                          Cancel
-                        </button>
-                      </Tooltip>
-                    </div>
-                  ) : (
-                    <div
-                      style={{
-                        display: "flex",
-                        gap: "0.5rem",
-                        margin: "0 auto",
-                        padding: "0px",
-                      }}
-                    >
-                      <Tooltip title="Edit">
-                        <button
-                          className="btn-edit"
-                          onClick={() => handleEditProject(project)}
-                        >
-                          Edit
-                        </button>
-                      </Tooltip>
-                      <Tooltip title="Delete">
-                        <button
-                          className="btn-delete"
-                          onClick={() => handleDeleteProject(project)}
-                        >
-                          Delete
-                        </button>
-                      </Tooltip>
-                    </div>
-                  )}
-                </td>
+        {" "}
+        {projects?.rows?.length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Image</th>
+                <th>Title</th>
+                <th>Technologies</th>
+                <th>GitHub Link</th>
+                <th>Live Demo Link</th>
+                <th>Description</th>
+                <th>Project Category</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
-
-  const experienceTableView = () => {
-    return (
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>S.No</th>
-              <th>Company</th>
-              <th>Position</th>
-              <th>Duration</th>
-              <th>Responsibilities</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {getExperience?.map((experience, index) => {
-              const isEditing = editingExperienceId === experience.id;
-              const currentExp = isEditing ? editingExperience : experience;
-
-              return (
-                <tr key={experience.id || index}>
+            </thead>
+            <tbody>
+              {projects?.rows?.map((project, index) => (
+                <tr
+                  key={project.id}
+                  className={editingId === project.id ? "editing" : ""}
+                >
                   <td style={{ color: "white" }}>{index + 1}</td>
+
+                  <td>
+                    {editingId === project.id ? (
+                      <>
+                        <input
+                          type="file"
+                          onChange={handleFileChange}
+                          className="file-input"
+                          id={`file-input-${project.id}`}
+                        />
+                        <label htmlFor={`file-input-${project.id}`}>
+                          <img
+                            src={imagePreview || project.image}
+                            alt={project.title}
+                            style={{
+                              width: "100px",
+                              height: "100px",
+                              objectFit: "cover",
+                            }}
+                            className="preview-image"
+                          />
+                        </label>
+                      </>
+                    ) : (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        style={{
+                          width: "100px",
+                          height: "100px",
+                          objectFit: "cover",
+                        }}
+                        className="preview-image"
+                      />
+                    )}
+                  </td>
+
                   <td>
                     <input
-                      readOnly={!isEditing}
+                      type="text"
                       className={
-                        isEditing ? "editable-input" : "readonly-input"
+                        editingId === project.id
+                          ? "editable-input"
+                          : "readonly-input"
                       }
-                      value={currentExp.company || ""}
-                      onChange={(e) =>
-                        setEditingExperience({
-                          ...editingExperience,
-                          company: e.target.value,
-                        })
-                      }
-                    />
-                  </td>
-                  <td>
-                    <input
-                      readOnly={!isEditing}
-                      className={
-                        isEditing ? "editable-input" : "readonly-input"
-                      }
-                      value={currentExp.position || ""}
-                      onChange={(e) =>
-                        setEditingExperience({
-                          ...editingExperience,
-                          position: e.target.value,
-                        })
-                      }
-                    />
-                  </td>
-                  <td>
-                    <input
-                      readOnly={!isEditing}
-                      className={
-                        isEditing ? "editable-input" : "readonly-input"
-                      }
-                      value={currentExp.duration || ""}
-                      onChange={(e) =>
-                        setEditingExperience({
-                          ...editingExperience,
-                          duration: e.target.value,
-                        })
-                      }
-                    />
-                  </td>
-                  <td>
-                    <textarea
-                      //  rows="4"
-                      //  cols="50"
-                      readOnly={!isEditing}
-                      className={
-                        isEditing ? "editable-input" : "readonly-input"
-                      }
+                      readOnly={editingId !== project.id}
                       value={
-                        Array.isArray(currentExp.responsibilities)
-                          ? currentExp.responsibilities.join(", ")
-                          : currentExp.responsibilities || ""
+                        editingId === project.id
+                          ? editingProject?.title || ""
+                          : project.title
                       }
                       onChange={(e) =>
-                        setEditingExperience({
-                          ...editingExperience,
-                          responsibilities: e.target.value,
+                        setEditingProject({
+                          ...editingProject,
+                          title: e.target.value,
                         })
                       }
                     />
                   </td>
                   <td>
-                    {isEditing ? (
+                    <input
+                      type="text"
+                      className={
+                        editingId === project.id
+                          ? "editable-input"
+                          : "readonly-input"
+                      }
+                      readOnly={editingId !== project.id}
+                      value={
+                        editingId === project.id
+                          ? editingProject?.technologies || ""
+                          : project.technologies
+                      }
+                      onChange={(e) =>
+                        setEditingProject({
+                          ...editingProject,
+                          technologies: e.target.value,
+                        })
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      className={
+                        editingId === project.id
+                          ? "editable-input"
+                          : "readonly-input"
+                      }
+                      readOnly={editingId !== project.id}
+                      value={
+                        editingId === project.id
+                          ? editingProject?.gitUrl || ""
+                          : project.gitUrl
+                      }
+                      onChange={(e) =>
+                        setEditingProject({
+                          ...editingProject,
+                          gitUrl: e.target.value,
+                        })
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      className={
+                        editingId === project.id
+                          ? "editable-input"
+                          : "readonly-input"
+                      }
+                      readOnly={editingId !== project.id}
+                      value={
+                        editingId === project.id
+                          ? editingProject?.projectLink || ""
+                          : project.projectLink
+                      }
+                      onChange={(e) =>
+                        setEditingProject({
+                          ...editingProject,
+                          projectLink: e.target.value,
+                        })
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      className={
+                        editingId === project.id
+                          ? "editable-input"
+                          : "readonly-input"
+                      }
+                      readOnly={editingId !== project.id}
+                      value={
+                        editingId === project.id
+                          ? editingProject?.description || ""
+                          : project.description
+                      }
+                      onChange={(e) =>
+                        setEditingProject({
+                          ...editingProject,
+                          description: e.target.value,
+                        })
+                      }
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      className={
+                        editingId === project.id
+                          ? "editable-input"
+                          : "readonly-input"
+                      }
+                      readOnly={editingId !== project.id}
+                      value={
+                        editingId === project.id
+                          ? editingProject?.projectCategory || ""
+                          : project.projectCategory
+                      }
+                      onChange={(e) =>
+                        setEditingProject({
+                          ...editingProject,
+                          projectCategory: e.target.value,
+                        })
+                      }
+                    />
+                  </td>
+
+                  <td>
+                    {editingId === project.id ? (
                       <div
                         style={{
                           display: "flex",
@@ -925,15 +795,22 @@ const Admin = () => {
                         <Tooltip title="Save">
                           <button
                             className="btn-save"
-                            onClick={() => handleSaveExperience(experience)}
+                            onClick={() => handleSaveProject(project)}
                           >
-                            Save
+                            {loading ? (
+                              <CircularProgress
+                                size={12}
+                                className="circular-color"
+                              />
+                            ) : (
+                              "Save"
+                            )}
                           </button>
                         </Tooltip>
                         <Tooltip title="Cancel">
                           <button
                             className="btn-cancel"
-                            onClick={handleCancelEditExperience}
+                            onClick={handleCancelEditProject}
                           >
                             Cancel
                           </button>
@@ -951,7 +828,7 @@ const Admin = () => {
                         <Tooltip title="Edit">
                           <button
                             className="btn-edit"
-                            onClick={() => handleEditExperience(experience)}
+                            onClick={() => handleEditProject(project)}
                           >
                             Edit
                           </button>
@@ -959,7 +836,7 @@ const Admin = () => {
                         <Tooltip title="Delete">
                           <button
                             className="btn-delete"
-                            onClick={() => handleDeleteExperience(experience)}
+                            onClick={() => handleDeleteProject(project)}
                           >
                             Delete
                           </button>
@@ -968,10 +845,187 @@ const Admin = () => {
                     )}
                   </td>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
+              ))}
+            </tbody>
+          </table>
+        ) : isLoading ? (
+          <div style={{ textAlign: "center", padding: "1rem" }}>
+            <CircularProgress />
+          </div>
+        ) : (
+          <p style={{ textAlign: "center", padding: "1rem" }}>
+            No projects found
+          </p>
+        )}
+      </div>
+    );
+  };
+
+  const experienceTableView = () => {
+    return (
+      <div>
+        {getExperience?.length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th>Company</th>
+                <th>Position</th>
+                <th>Duration</th>
+                <th>Responsibilities</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {getExperience?.map((experience, index) => {
+                const isEditing = editingExperienceId === experience.id;
+                const currentExp = isEditing ? editingExperience : experience;
+
+                return (
+                  <tr key={experience.id || index}>
+                    <td style={{ color: "white" }}>{index + 1}</td>
+                    <td>
+                      <input
+                        readOnly={!isEditing}
+                        className={
+                          isEditing ? "editable-input" : "readonly-input"
+                        }
+                        value={currentExp.company || ""}
+                        onChange={(e) =>
+                          setEditingExperience({
+                            ...editingExperience,
+                            company: e.target.value,
+                          })
+                        }
+                      />
+                    </td>
+                    <td>
+                      <input
+                        readOnly={!isEditing}
+                        className={
+                          isEditing ? "editable-input" : "readonly-input"
+                        }
+                        value={currentExp.position || ""}
+                        onChange={(e) =>
+                          setEditingExperience({
+                            ...editingExperience,
+                            position: e.target.value,
+                          })
+                        }
+                      />
+                    </td>
+                    <td>
+                      <input
+                        readOnly={!isEditing}
+                        className={
+                          isEditing ? "editable-input" : "readonly-input"
+                        }
+                        value={currentExp.duration || ""}
+                        onChange={(e) =>
+                          setEditingExperience({
+                            ...editingExperience,
+                            duration: e.target.value,
+                          })
+                        }
+                      />
+                    </td>
+                    <td>
+                      <textarea
+                        //  rows="4"
+                        //  cols="50"
+                        readOnly={!isEditing}
+                        className={
+                          isEditing ? "editable-input" : "readonly-input"
+                        }
+                        value={
+                          Array.isArray(currentExp.responsibilities)
+                            ? currentExp.responsibilities.join(", ")
+                            : currentExp.responsibilities || ""
+                        }
+                        onChange={(e) =>
+                          setEditingExperience({
+                            ...editingExperience,
+                            responsibilities: e.target.value,
+                          })
+                        }
+                      />
+                    </td>
+                    <td>
+                      {isEditing ? (
+                        <div
+                          style={{
+                            display: "flex",
+                            gap: "0.5rem",
+                            margin: "0 auto",
+                            padding: "0px",
+                          }}
+                        >
+                          <Tooltip title="Save">
+                            <button
+                              className="btn-save"
+                              onClick={() => handleSaveExperience(experience)}
+                            >
+                              {loading ? (
+                                <CircularProgress
+                                  className="circular-color"
+                                  size={12}
+                                />
+                              ) : (
+                                "Save"
+                              )}
+                            </button>
+                          </Tooltip>
+                          <Tooltip title="Cancel">
+                            <button
+                              className="btn-cancel"
+                              onClick={handleCancelEditExperience}
+                            >
+                              Cancel
+                            </button>
+                          </Tooltip>
+                        </div>
+                      ) : (
+                        <div
+                          style={{
+                            display: "flex",
+                            gap: "0.5rem",
+                            margin: "0 auto",
+                            padding: "0px",
+                          }}
+                        >
+                          <Tooltip title="Edit">
+                            <button
+                              className="btn-edit"
+                              onClick={() => handleEditExperience(experience)}
+                            >
+                              Edit
+                            </button>
+                          </Tooltip>
+                          <Tooltip title="Delete">
+                            <button
+                              className="btn-delete"
+                              onClick={() => handleDeleteExperience(experience)}
+                            >
+                              Delete
+                            </button>
+                          </Tooltip>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        ) : isLoading ? (
+          <div style={{ textAlign: "center", padding: "1rem" }}>
+            <CircularProgress />
+          </div>
+        ) : (
+          <p style={{ textAlign: "center", padding: "1rem" }}>
+            No experience found
+          </p>
+        )}
       </div>
     );
   };
