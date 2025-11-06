@@ -234,6 +234,10 @@
   letter-spacing: 0.5px;
   padding: 0.5rem 0.7rem;
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   transition: var(--transition);
 }
