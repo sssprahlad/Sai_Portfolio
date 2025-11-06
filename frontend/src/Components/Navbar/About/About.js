@@ -66,7 +66,7 @@ const About = () => {
   };
 
   const handleDownlodCv = (myDetails) => {
-    const fileUrl = `${API}/uploads/${myDetails?.resumePath}`;
+    const fileUrl = `${API}/${myDetails?.resume}`;
     const link = document.createElement("a");
     link.href = fileUrl;
     link.download = myDetails?.resumeName;
