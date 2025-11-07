@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { LOGIN_API, FETCH_DATA } from "../../../constants/Constants";
 import SnackbarPopup from "../../../constants/Snackbar";
 import { useSelector } from "react-redux";
+import { CircularProgress } from "@mui/material";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ const Login = () => {
     message: "",
     severity: "success",
   });
+  const [loading, setLoading] = useState(false);
 
   const handleChangeText = (e) => {
     const { name, value } = e.target;
@@ -31,6 +33,7 @@ const Login = () => {
     console.log(userData);
 
     try {
+      setLoading(true);
       const response = await FETCH_DATA(LOGIN_API, "POST", userData);
       console.log(response);
 
@@ -40,6 +43,7 @@ const Login = () => {
           message: response.message,
           severity: "success",
         });
+        setLoading(false);
 
         setTimeout(() => {
           localStorage.setItem("token", response.token);
@@ -53,6 +57,7 @@ const Login = () => {
           message: response.message,
           severity: "error",
         });
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
@@ -62,6 +67,7 @@ const Login = () => {
         message: error.message,
         severity: "error",
       });
+      setLoading(false);
     }
   };
 
@@ -103,7 +109,7 @@ const Login = () => {
           <label htmlFor="showPassword">show password</label>
         </div>
         <button type="submit" className="login-button">
-          Login
+          {loading ? <CircularProgress size={20} color="inherit" /> : "Login"}
         </button>
       </form>
 

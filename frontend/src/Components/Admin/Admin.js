@@ -1048,7 +1048,7 @@ const Admin = () => {
       {filterProjects()}
       {showProjectsTable && projectsTableView()}
       {showUpdateDetailsTable && (
-        <h5 style={{ textAlign: "center", paddingBottom: "1rem" }}>
+        <h5 style={{ textAlign: "center", marginBottom: "1rem" }}>
           You can update your details only
         </h5>
       )}

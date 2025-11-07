@@ -1,5 +1,6 @@
 .admin-page-container {
   padding: 0rem 3rem;
+  min-height: 55vh;
 }
 
 @media (max-width: 576px) {

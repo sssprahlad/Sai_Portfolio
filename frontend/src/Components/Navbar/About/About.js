@@ -45,6 +45,17 @@ const About = () => {
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
 
+  const buttonBgColors = [
+    "rgb(248, 105, 27)",
+    "rgb(40, 129, 47)",
+    "rgb(209, 29, 212)",
+    "rgb(191, 39, 33)",
+    "rgb(74, 0, 163)",
+    "#d65e46",
+    "#0a6c75",
+    "#4672fe",
+  ];
+
   useEffect(() => {
     fetchExperience();
   }, []);
@@ -189,17 +200,28 @@ const About = () => {
               <h2>Frontend</h2>
 
               <ul className="technical-skills-container">
-                {myDetails?.frontend?.map((skill, index) => (
-                  <li key={index}>{skill}</li>
-                ))}
+                {myDetails?.frontend?.map((skill, index) => {
+                  const randomColor = buttonBgColors[index + 1];
+                  return (
+                    <li key={index} style={{ backgroundColor: randomColor }}>
+                      {skill}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
             <div className="frontend-container">
               <h2>Backend</h2>
               <ul className="technical-skills-container">
-                {myDetails?.backend?.map((skill, index) => (
-                  <li key={index}>{skill}</li>
-                ))}
+                {myDetails?.backend?.map((skill, index) => {
+                  const randomColor =
+                    buttonBgColors[buttonBgColors.length - index - 1];
+                  return (
+                    <li key={index} style={{ backgroundColor: randomColor }}>
+                      {skill}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
@@ -207,9 +229,20 @@ const About = () => {
               <h2>Database</h2>
 
               <ul className="technical-skills-container">
-                {myDetails?.database?.map((skill, index) => (
-                  <li key={index}>{skill}</li>
-                ))}
+                {myDetails?.database?.map((skill, index) => {
+                  const randomColor =
+                    buttonBgColors[
+                      Math.floor(Math.random() * buttonBgColors.length)
+                    ];
+                  return (
+                    <li
+                      key={index}
+                      style={{ backgroundColor: randomColor, width: "100px" }}
+                    >
+                      {skill}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>
