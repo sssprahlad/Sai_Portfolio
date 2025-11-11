@@ -63,15 +63,15 @@ const Projects = () => {
     }
   }, [searchQuery, getProjects]);
 
-  const handleProjectsViews = () => {
-    setProjectsView(true);
-    setDescriptionView(false);
-  };
+  // const handleProjectsViews = () => {
+  //   setProjectsView(true);
+  //   setDescriptionView(false);
+  // };
 
-  const handleDescriptionViews = () => {
-    setProjectsView(false);
-    setDescriptionView(true);
-  };
+  // const handleDescriptionViews = () => {
+  //   setProjectsView(false);
+  //   setDescriptionView(true);
+  // };
 
   useEffect(() => {
     const handleScroll = () => {
