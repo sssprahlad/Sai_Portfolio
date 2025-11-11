@@ -15,7 +15,7 @@ import { GoProjectSymlink } from "react-icons/go";
 import { LuPhoneCall } from "react-icons/lu";
 import { GrUserAdmin } from "react-icons/gr";
 import { useSelector, useDispatch } from "react-redux";
-import { setDarkAndLightMode, setDarkMode } from "../../redux/reducer/services";
+import { setDarkAndLightMode } from "../../redux/reducer/services";
 import Tooltip from "@mui/material/Tooltip";
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({

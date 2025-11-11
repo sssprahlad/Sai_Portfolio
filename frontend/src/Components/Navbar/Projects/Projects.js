@@ -12,12 +12,8 @@ const Projects = () => {
   const [getProjects, setGetProjects] = useState([]);
   const [filterProjects, setFilterProjects] = useState([]);
   const [searchQuery, setSearchQuery] = useState("all");
-  const [projectsView, setProjectsView] = useState(true);
-  const [descriptionView, setDescriptionView] = useState(false);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
-
-  console.log(projectsView, descriptionView, "projectsView");
 
   useEffect(() => {
     fetchProjects();
@@ -63,15 +59,6 @@ const Projects = () => {
     }
   }, [searchQuery, getProjects]);
 
-  // const handleProjectsViews = () => {
-  //   setProjectsView(true);
-  //   setDescriptionView(false);
-  // };
-
-  // const handleDescriptionViews = () => {
-  //   setProjectsView(false);
-  //   setDescriptionView(true);
-  // };
 
   useEffect(() => {
     const handleScroll = () => {

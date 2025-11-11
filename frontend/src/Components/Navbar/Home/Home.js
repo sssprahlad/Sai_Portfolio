@@ -19,28 +19,28 @@ const Home = () => {
   );
 
   const [loading, setLoading] = useState(false);
-
   const navigate = useNavigate();
-  useEffect(() => {
-    fetchMyDetails();
-  }, []);
 
-  const fetchMyDetails = async () => {
-    try {
-      setLoading(true);
-      const response = await fetch(GET_MY_DETAILS_API);
-      if (response.status === 200) {
+  useEffect(() => {
+    const fetchMyDetails = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch(GET_MY_DETAILS_API);
         const data = await response.json();
-        setGetMyDetails(data?.rows?.[0]);
-        dispatch(setMyDetails(data?.rows?.[0]));
+        if (data.success) {
+          setGetMyDetails(data.myDetails);
+          dispatch(setMyDetails(data.myDetails));
+        }
+      } catch (error) {
+        console.error("Error fetching details:", error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      console.log(error);
-      setGetMyDetails([]);
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
+    
+    fetchMyDetails();
+  }, [dispatch]);
+
 
   return (
     <div
@@ -121,8 +121,8 @@ const Home = () => {
           ) : (
             <img
               className="profile-image"
-              src={getMyDetails?.profileImage}
-              alt="image"
+              src={myDetails?.profileImage}
+              alt="Profile"
             />
           )}
         </div>
