@@ -316,7 +316,7 @@ const Contact = () => {
         className={visible ? "arrow-btn-icon" : "hide-arrow-btn"}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
-        <FaArrowUp size={20} />
+        <FaArrowUp size={20} color="white" />
       </div>
     </div>
   );

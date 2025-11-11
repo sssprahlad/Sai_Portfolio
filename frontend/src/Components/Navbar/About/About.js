@@ -288,7 +288,7 @@ const About = () => {
         className={"arrow-btn-icon" + (visible ? "" : "show")}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
-        <FaArrowUp size={20} />
+        <FaArrowUp size={20} color="white" />
       </div>
     </div>
   );
