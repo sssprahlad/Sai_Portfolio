@@ -33,9 +33,9 @@
   animation: bounceInRight var(--animate-duration) var(--animate-delay);
 }
 
-@media (max-width:912px){
+@media (max-width: 912px) {
   .child-container1,
-  .child-container2{
+  .child-container2 {
     width: 100%;
   }
 }
@@ -105,7 +105,7 @@
 }
 
 .home-title {
-  letter-spacing: calc(o.1rem + 3px);
+  letter-spacing: calc(0.1rem + 3px);
   text-shadow: 1px 2px 7px #48647f;
   /* margin-bottom: 1.2rem; */
   animation: 1s linear 0s 1 normal none running letterSpacingAnimation;
