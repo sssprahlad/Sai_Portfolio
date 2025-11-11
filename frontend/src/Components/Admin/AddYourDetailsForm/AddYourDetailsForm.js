@@ -1,12 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import "./AddYourDetailsForm.css";
 import { useState } from "react";
-import {
-  ADD_MY_DETAILS_API,
-  GET_MY_DETAILS_API,
-  FETCH_DATA,
-  API,
-} from "../../../constants/Constants";
+import { ADD_MY_DETAILS_API, API } from "../../../constants/Constants";
 import SnackbarPopup from "../../../constants/Snackbar";
 import { useSelector } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -38,7 +33,7 @@ const AddYourDetailsForm = ({
     portfolioLink: "",
   });
   const [resume, setResume] = useState(null);
-  const { darkAndLightMode } = useSelector((state) => state.services);
+  // const { darkAndLightMode } = useSelector((state) => state.services);
   const [loading, setLoading] = useState(false);
 
   console.log(resume, "resume");

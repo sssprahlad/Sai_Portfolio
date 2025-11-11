@@ -2,10 +2,8 @@ import React from "react";
 import "./Projects.css";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { GET_PROJECTS_API, API } from "../../../constants/Constants";
+import { GET_PROJECTS_API } from "../../../constants/Constants";
 import { FaExternalLinkAlt } from "react-icons/fa";
-import { GoProjectSymlink } from "react-icons/go";
-import { GrProjects } from "react-icons/gr";
 import { FaArrowUp } from "react-icons/fa";
 import Tooltip from "@mui/material/Tooltip";
 
@@ -18,6 +16,8 @@ const Projects = () => {
   const [descriptionView, setDescriptionView] = useState(false);
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
+
+  console.log(projectsView, descriptionView, "projectsView");
 
   useEffect(() => {
     fetchProjects();
@@ -271,7 +271,7 @@ const Projects = () => {
         className={visible ? "arrow-btn-icon" : "hide-arrow-btn"}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
-        <FaArrowUp size={20} color="white" />
+        <FaArrowUp size={20} style={{ color: "white" }} />
       </div>
     </div>
   );

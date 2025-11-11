@@ -12,6 +12,7 @@ const Footer = () => {
   const { darkAndLightMode, myDetails } = useSelector(
     (state) => state.services
   );
+  console.log(darkAndLightMode, "darkAndLightMode");
   return (
     <footer>
       <div className="footer-container">

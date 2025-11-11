@@ -132,7 +132,7 @@ const About = () => {
             <img
               className="profile-image"
               src={myDetails?.profileImage}
-              alt="Profile Image"
+              alt="Profile"
             />
           )}
         </div>
@@ -288,7 +288,7 @@ const About = () => {
         className={"arrow-btn-icon" + (visible ? "" : "show")}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
-        <FaArrowUp size={20} color="white" />
+        <FaArrowUp size={20} style={{ color: "white" }} />
       </div>
     </div>
   );

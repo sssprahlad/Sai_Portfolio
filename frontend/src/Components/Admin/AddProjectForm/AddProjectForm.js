@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from "react";
 import "./AddProjectForm.css";
 import { useState } from "react";
 import { FETCH_DATA, ADD_PROJECTS_API } from "../../../constants/Constants";
-import SnackbarPopup from "../../../constants/Snackbar";
 import { CircularProgress } from "@mui/material";
 
 const AddProjectForm = ({ onClose, setAddProjectStatus, fetchProjects }) => {
@@ -23,6 +22,7 @@ const AddProjectForm = ({ onClose, setAddProjectStatus, fetchProjects }) => {
     message: "",
     severity: "success",
   });
+  console.log(snackbar);
   const [loading, setLoading] = useState(false);
 
   const handleImageChange = (e) => {

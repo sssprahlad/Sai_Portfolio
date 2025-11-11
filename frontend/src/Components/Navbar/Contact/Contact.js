@@ -35,6 +35,8 @@ const Contact = () => {
 
   const [copyTextStatus, setCopyTextStatus] = useState(false);
 
+  console.log(contactDetailsEmpty, "contactDetailsEmpty");
+
   const contactDetails = [
     {
       id: 1,
@@ -316,7 +318,7 @@ const Contact = () => {
         className={visible ? "arrow-btn-icon" : "hide-arrow-btn"}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
-        <FaArrowUp size={20} color="white" />
+        <FaArrowUp size={20} style={{ color: "white" }} />
       </div>
     </div>
   );

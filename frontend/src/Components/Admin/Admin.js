@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./Admin.css";
 import { useNavigate } from "react-router-dom";
 import AddProjectForm from "./AddProjectForm/AddProjectForm";
@@ -24,7 +24,7 @@ const Admin = () => {
   const [showAddProject, setShowAddProject] = useState(false);
   const [showAddYourDetails, setShowAddYourDetails] = useState(false);
   const [projects, setProjects] = useState([]);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [addProjectStatus, setAddProjectStatus] = useState(false);
   const [showAddExperience, setShowAddExperience] = useState(false);
   const [editingId, setEditingId] = useState(null);
@@ -37,7 +37,7 @@ const Admin = () => {
     severity: "success",
   });
   const [imagePreview, setImagePreview] = useState("");
-  const fileInputRef = useRef(null);
+  // const fileInputRef = useRef(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [getMyDetails, setGetMyDetails] = useState([]);
@@ -46,10 +46,12 @@ const Admin = () => {
   const [showExperienceTable, setShowExperienceTable] = useState(false);
   const [showUpdateDetailsTable, setShowUpdateDetailsTable] = useState(false);
   const [editingExperience, setEditingExperience] = useState(null);
-  const [originalExperience, setOriginalExperience] = useState(null);
+  // const [originalExperience, setOriginalExperience] = useState(null);
   const [text, setText] = useState("");
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  console.log(addProjectStatus, "status");
 
   const fullText = "Admin";
 
@@ -1064,7 +1066,7 @@ const Admin = () => {
         className={visible ? "arrow-btn-icon" : "hide-arrow-btn"}
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       >
-        <FaArrowUp size={20} color="white" />
+        <FaArrowUp size={20} style={{ color: "white" }} />
       </div>
     </div>
   );
