@@ -71,7 +71,7 @@
 
 .nav-link:hover {
   color: #4a90e2;
-  color: #fff;
+  color: #f52cf9;
 }
 
 .nav-link::after {
@@ -270,5 +270,5 @@
 
 .active:hover {
   background: #3a7bc8;
-  color: #fff;
+  color: #f52cf9 !important;
 }
