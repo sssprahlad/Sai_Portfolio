@@ -40,7 +40,7 @@ const Projects = () => {
     const link = document.createElement("a");
     link.href = fileUrl;
     // link.download = url;
-    // link.target = "_blank";
+    link.target = "_blank";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -58,7 +58,6 @@ const Projects = () => {
       setFilterProjects(filteredProjects);
     }
   }, [searchQuery, getProjects]);
-
 
   useEffect(() => {
     const handleScroll = () => {
