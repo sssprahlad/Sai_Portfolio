@@ -269,6 +269,7 @@
 }
 
 .active:hover {
-  background: #3a7bc8;
-  color: #f52cf9 !important;
+  /* background: #3a7bc8;
+  color: #f52cf9 !important; */
+  color: #ffffff;
 }
