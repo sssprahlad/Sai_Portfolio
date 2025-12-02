@@ -20,7 +20,10 @@ const app = express();
 //     allowedHeaders: ['Content-Type', 'Authorization']
 // }));
 
-const allowedOrigins = ["http://localhost:3000"];
+const allowedOrigins = [
+  "https://sai-portfolio-tawny.vercel.app",
+  "http://localhost:3000",
+];
 // "https://sai-portfolio-tawny.vercel.app",
 
 const corsOptions = {
