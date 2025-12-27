@@ -25,12 +25,12 @@ const Home = () => {
     const fetchMyDetails = async () => {
       try {
         setLoading(true);
-        const response = await fetch(GET_MY_DETAILS_API,{
-          method:"GET",
-          headers:{
+        const response = await fetch(GET_MY_DETAILS_API, {
+          method: "GET",
+          credentials: "include",
+          headers: {
             "Content-Type": "application/json",
-            credentials: "include",
-          }
+          },
         });
         const data = await response.json();
         if (data.success) {
@@ -43,10 +43,9 @@ const Home = () => {
         setLoading(false);
       }
     };
-    
+
     fetchMyDetails();
   }, [dispatch]);
-
 
   return (
     <div

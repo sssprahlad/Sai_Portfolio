@@ -65,9 +65,9 @@ const About = () => {
       setLoading(true);
       const response = await fetch(GET_MY_EXPERIENCE_API, {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          credentials: "include",
           // Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });

@@ -24,9 +24,9 @@ const Projects = () => {
       setLoading(true);
       const response = await fetch(GET_PROJECTS_API, {
         method: "GET",
+        credentials: "include",
         headers: {
-          ContentType: "application/json",
-          credentials: "include",
+          "Content-Type": "application/json",
         },
       });
       if (response.status === 200) {

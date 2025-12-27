@@ -175,9 +175,9 @@ const Admin = () => {
     try {
       const response = await fetch(`${GET_MY_DETAILS_API}`, {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          credentials: "include",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -201,9 +201,9 @@ const Admin = () => {
     try {
       const response = await fetch(`${GET_MY_EXPERIENCE_API}`, {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          credentials: "include",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -228,9 +228,9 @@ const Admin = () => {
         }${searchQuery}`,
         {
           method: "GET",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            credentials: "include",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
@@ -260,9 +260,9 @@ const Admin = () => {
         }${searchQuery}`,
         {
           method: "GET",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            credentials: "include",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
@@ -401,9 +401,9 @@ const Admin = () => {
     try {
       const response = await fetch(`${DELETE_PROJECTS_API}/${project.id}`, {
         method: "DELETE",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          credentials: "include",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -451,9 +451,9 @@ const Admin = () => {
         `${DELETE_MY_EXPERIENCE_API}/${experience.id}`,
         {
           method: "DELETE",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            credentials: "include",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
@@ -499,9 +499,9 @@ const Admin = () => {
         `${UPDATE_MY_EXPERIENCE_API}/${experience.id}`,
         {
           method: "PATCH",
+          credentials: "include",
           headers: {
             "Content-Type": "application/json",
-            credentials: "include",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify(experienceToUpdate),
@@ -540,9 +540,9 @@ const Admin = () => {
       setLoading(true);
       const response = await fetch(`${UPDATE_PROJECTS_API}/${project.id}`, {
         method: "PATCH",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          credentials: "include",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify(editingProject),

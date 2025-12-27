@@ -29,9 +29,9 @@ export const SEND_MAIL_API = `${API}/api/send-alert`;
 export const FETCH_DATA = async (url, method, body) => {
   const response = await fetch(url, {
     method: method,
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
-      credentials: "include",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
     body: JSON.stringify(body),

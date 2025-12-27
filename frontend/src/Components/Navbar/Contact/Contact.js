@@ -76,9 +76,9 @@ const Contact = () => {
       setLoading(true);
       const response = await fetch(SEND_MAIL_API, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
-          credentials: "include",
         },
         body: JSON.stringify(mailDetails),
       });
