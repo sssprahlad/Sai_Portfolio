@@ -40,9 +40,12 @@ const Home = () => {
         return;
       }
       const data = await response.json();
-      if (data.success) {
-        setGetMyDetails(data.myDetails);
-        dispatch(setMyDetails(data.myDetails));
+      if (data.status === 200) {
+        // data.success
+        // setGetMyDetails(data.myDetails);
+        // dispatch(setMyDetails(data.myDetails));
+        setGetMyDetails(data.rows);
+        dispatch(setMyDetails(data.rows));
       }
     } catch (error) {
       console.error("Error fetching details:", error);
