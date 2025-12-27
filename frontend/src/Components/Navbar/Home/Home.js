@@ -21,31 +21,31 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchMyDetails = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(GET_MY_DETAILS_API, {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const data = await response.json();
-        if (data.success) {
-          setGetMyDetails(data.myDetails);
-          dispatch(setMyDetails(data.myDetails));
-        }
-      } catch (error) {
-        console.error("Error fetching details:", error);
-      } finally {
-        setLoading(false);
+  const fetchMyDetails = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch(GET_MY_DETAILS_API, {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      if (data.success) {
+        setGetMyDetails(data.myDetails);
+        dispatch(setMyDetails(data.myDetails));
       }
-    };
+    } catch (error) {
+      console.error("Error fetching details:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchMyDetails();
-  }, [dispatch]);
+  }, []);
 
   return (
     <div
