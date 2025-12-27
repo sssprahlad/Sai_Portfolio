@@ -25,7 +25,13 @@ const Home = () => {
     const fetchMyDetails = async () => {
       try {
         setLoading(true);
-        const response = await fetch(GET_MY_DETAILS_API);
+        const response = await fetch(GET_MY_DETAILS_API,{
+          method:"GET",
+          headers:{
+            "Content-Type": "application/json",
+            credentials: "include",
+          }
+        });
         const data = await response.json();
         if (data.success) {
           setGetMyDetails(data.myDetails);

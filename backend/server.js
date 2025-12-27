@@ -13,31 +13,38 @@ require("./config/database");
 
 const app = express();
 
-// app.use(cors());
-// app.use(cors({
-//     origin: 'http://localhost:3000',
-//     credentials: true,
-//     allowedHeaders: ['Content-Type', 'Authorization']
-// }));
-
 const allowedOrigins = [
   "https://sai-portfolio-tawny.vercel.app",
   "http://localhost:3000",
 ];
-// "https://sai-portfolio-tawny.vercel.app",
+
+// const corsOptions = {
+//   origin: function (origin, callback) {
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS: " + origin));
+//     }
+//   },
+//   credentials: true,
+//   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+//   allowedHeaders: ["Content-Type", "Authorization"],
+//   optionsSuccessStatus: 204,
+// };
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
-      callback(new Error("Not allowed by CORS: " + origin));
+      callback(null, true);
     }
   },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  optionsSuccessStatus: 204,
 };
 
 app.use(cors(corsOptions));

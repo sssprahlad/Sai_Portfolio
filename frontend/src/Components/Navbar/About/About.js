@@ -63,7 +63,14 @@ const About = () => {
   const fetchExperience = async () => {
     try {
       setLoading(true);
-      const response = await fetch(GET_MY_EXPERIENCE_API);
+      const response = await fetch(GET_MY_EXPERIENCE_API, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          credentials: "include",
+          // Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
       if (response.status === 200) {
         const data = await response.json();
         setExperience(data?.data);

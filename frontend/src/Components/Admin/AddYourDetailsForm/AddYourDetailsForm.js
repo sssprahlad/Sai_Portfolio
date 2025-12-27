@@ -108,6 +108,7 @@ const AddYourDetailsForm = ({
           method: getMyDetails?.[0]?.resumeImage ? "PATCH" : "POST",
           headers: {
             Authorization: `Bearer ${token}`,
+            credentials: "include",
             // 'Content-Type': 'multipart/form-data'
           },
           body: formData,

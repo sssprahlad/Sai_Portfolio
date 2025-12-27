@@ -22,7 +22,13 @@ const Projects = () => {
   const fetchProjects = async () => {
     try {
       setLoading(true);
-      const response = await fetch(GET_PROJECTS_API);
+      const response = await fetch(GET_PROJECTS_API, {
+        method: "GET",
+        headers: {
+          ContentType: "application/json",
+          credentials: "include",
+        },
+      });
       if (response.status === 200) {
         const data = await response.json();
         setGetProjects(data?.rows);

@@ -177,6 +177,7 @@ const Admin = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          credentials: "include",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -202,6 +203,7 @@ const Admin = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          credentials: "include",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -228,6 +230,7 @@ const Admin = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            credentials: "include",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
@@ -259,6 +262,7 @@ const Admin = () => {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
+            credentials: "include",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
@@ -399,6 +403,7 @@ const Admin = () => {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
+          credentials: "include",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -448,6 +453,7 @@ const Admin = () => {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
+            credentials: "include",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
@@ -495,6 +501,7 @@ const Admin = () => {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            credentials: "include",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify(experienceToUpdate),
@@ -535,6 +542,7 @@ const Admin = () => {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          credentials: "include",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
         body: JSON.stringify(editingProject),
