@@ -21,6 +21,10 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    fetchMyDetails();
+  }, []);
+
   const fetchMyDetails = async () => {
     try {
       setLoading(true);
@@ -31,6 +35,10 @@ const Home = () => {
           "Content-Type": "application/json",
         },
       });
+      if (!response.ok) {
+        console.error("Unauthorized or failed:", response.status);
+        return;
+      }
       const data = await response.json();
       if (data.success) {
         setGetMyDetails(data.myDetails);
@@ -42,10 +50,6 @@ const Home = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchMyDetails();
-  }, []);
 
   return (
     <div
