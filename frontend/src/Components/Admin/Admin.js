@@ -125,23 +125,23 @@ const Admin = () => {
   //     return () => clearInterval(interval);
   //   }, [fullText]);
 
-  useEffect(() => {
-    let index = 0;
+  // useEffect(() => {
+  //   let index = 0;
 
-    const interval = setInterval(() => {
-      setText(fullText.slice(0, index + 1));
-      index++;
+  //   const interval = setInterval(() => {
+  //     setText(fullText.slice(0, index + 1));
+  //     index++;
 
-      if (index === fullText.length) {
-        setTimeout(() => {
-          index = 0;
-          setText("");
-        }, 1000);
-      }
-    }, 500);
+  //     if (index === fullText.length) {
+  //       setTimeout(() => {
+  //         index = 0;
+  //         setText("");
+  //       }, 1000);
+  //     }
+  //   }, 500);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   useEffect(() => {
     fetchProjects();

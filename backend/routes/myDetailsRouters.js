@@ -131,29 +131,92 @@ router.get("/my-details", (req, res) => {
   });
 });
 
-// router.patch("/my-details/:id", authMiddleware, upload.single("resume"), (req, res) => {
-//     const {name, email, phone, address, profileImage, resume, linkedIn, github, twitter, facebook, instagram, whatsapp, location, frontend, backend, database } = req.body;
+// router.patch(
+//   "/my-details/:id",
+//   authMiddleware,
+//   upload.single("resume"),
+//   (req, res) => {
+//     const {
+//       name,
+//       email,
+//       phone,
+//       address,
+//       profileImage,
+//       resume,
+//       linkedIn,
+//       github,
+//       twitter,
+//       facebook,
+//       instagram,
+//       whatsapp,
+//       location,
+//       frontend,
+//       backend,
+//       database,
+//     } = req.body;
 //     console.log(req.body);
 
-//     if ( !name || !email || !phone || !address || !profileImage || !resume || !linkedIn || !github || !twitter || !facebook || !instagram || !whatsapp || !location || !frontend || !backend || !database) {
-//         return res.status(400).json({status: 400, message: "All fields are required" });
+//     if (
+//       !name ||
+//       !email ||
+//       !phone ||
+//       !address ||
+//       !profileImage ||
+//       !resume ||
+//       !linkedIn ||
+//       !github ||
+//       !twitter ||
+//       !facebook ||
+//       !instagram ||
+//       !whatsapp ||
+//       !location ||
+//       !frontend ||
+//       !backend ||
+//       !database
+//     ) {
+//       return res
+//         .status(400)
+//         .json({ status: 400, message: "All fields are required" });
 //     }
 
 //     db.run(
-//         "UPDATE myDetails SET name = ?, email = ?, phone = ?, address = ?, profileImage = ?, resume = ?, linkedIn = ?, github = ?, twitter = ?, facebook = ?, instagram = ?, whatsapp = ?, location = ?, frontend = ?, backend = ?, database = ? WHERE id = ?",
-//         [name,email,phone,address,profileImage,resume,linkedIn,github,twitter,facebook,instagram,whatsapp,location,
-//             Array.isArray(frontend) ? JSON.stringify(frontend) : JSON.stringify(frontend.split(",")),
-//             Array.isArray(backend) ? JSON.stringify(backend) : JSON.stringify(backend.split(",")),
-//             Array.isArray(database) ? JSON.stringify(database) : JSON.stringify(database.split(","))],
-//         function (err) {
-//             if (err) {
-//                 console.error(err);
-//                 return res.status(500).json({status: 500, message: "Failed to update your details" });
-//             }
-//             res.json({status: 200, message: "Your details updated successfully" });
+//       "UPDATE myDetails SET name = ?, email = ?, phone = ?, address = ?, profileImage = ?, resume = ?, linkedIn = ?, github = ?, twitter = ?, facebook = ?, instagram = ?, whatsapp = ?, location = ?, frontend = ?, backend = ?, database = ? WHERE id = ?",
+//       [
+//         name,
+//         email,
+//         phone,
+//         address,
+//         profileImage,
+//         resume,
+//         linkedIn,
+//         github,
+//         twitter,
+//         facebook,
+//         instagram,
+//         whatsapp,
+//         location,
+//         Array.isArray(frontend)
+//           ? JSON.stringify(frontend)
+//           : JSON.stringify(frontend.split(",")),
+//         Array.isArray(backend)
+//           ? JSON.stringify(backend)
+//           : JSON.stringify(backend.split(",")),
+//         Array.isArray(database)
+//           ? JSON.stringify(database)
+//           : JSON.stringify(database.split(",")),
+//       ],
+//       function (err) {
+//         if (err) {
+//           console.error(err);
+//           return res
+//             .status(500)
+//             .json({ status: 500, message: "Failed to update your details" });
 //         }
+//         res.json({ status: 200, message: "Your details updated successfully" });
+//       }
 //     );
-// });
+//   }
+// );
 
 router.patch(
   "/my-details/:id",
@@ -161,6 +224,10 @@ router.patch(
   upload.single("resume"),
   (req, res) => {
     const { id } = req.params;
+
+    console.log(req.body, "patch");
+    console.log(id, "param");
+
     const {
       name,
       email,
@@ -182,30 +249,30 @@ router.patch(
       portfolioLink,
     } = req.body;
 
-    if (
-      !name ||
-      !email ||
-      !phone ||
-      !address ||
-      !profileImage ||
-      !linkedIn ||
-      !github ||
-      !twitter ||
-      !facebook ||
-      !instagram ||
-      !whatsapp ||
-      !location ||
-      !frontend ||
-      !backend ||
-      !database ||
-      !description ||
-      !copyRightYear ||
-      !portfolioLink
-    ) {
-      return res
-        .status(400)
-        .json({ status: 400, message: "All fields are required" });
-    }
+    // if (
+    //   !name ||
+    //   !email ||
+    //   !phone ||
+    //   !address ||
+    //   !profileImage ||
+    //   !linkedIn ||
+    //   !github ||
+    //   !twitter ||
+    //   !facebook ||
+    //   !instagram ||
+    //   !whatsapp ||
+    //   !location ||
+    //   !frontend ||
+    //   !backend ||
+    //   !database ||
+    //   !description ||
+    //   !copyRightYear ||
+    //   !portfolioLink
+    // ) {
+    //   return res
+    //     .status(400)
+    //     .json({ status: 400, message: "All fields are required" });
+    // }
 
     db.get("SELECT resume FROM myDetails WHERE id = ?", [id], (err, row) => {
       if (err) {
@@ -230,7 +297,7 @@ router.patch(
       }
 
       db.run(
-        `UPDATE myDetails 
+        `UPDATE myDetails
              SET name = ?, email = ?, phone = ?, address = ?, profileImage = ?, resume = ?, linkedIn = ?, github = ?, twitter = ?, facebook = ?, instagram = ?, whatsapp = ?, location = ?, frontend = ?, backend = ?, database = ?, description = ?, copyRightYear = ?, portfolioLink = ?
              WHERE id = ?`,
         [

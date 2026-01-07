@@ -37,6 +37,7 @@ const AddYourDetailsForm = ({
   const [loading, setLoading] = useState(false);
 
   console.log(resume, "resume");
+  console.log(getMyDetails, " getMyDetails");
 
   useEffect(() => {
     if (getMyDetails?.length > 0) {
@@ -85,12 +86,14 @@ const AddYourDetailsForm = ({
       setLoading(true);
       const formData = new FormData();
 
+      // Only append fields that have values
       Object.entries(yourDetailsData).forEach(([key, value]) => {
-        if (value) {
+        if (value !== undefined && value !== null && value !== "") {
           formData.append(key, value);
         }
       });
 
+      // Append file if it exists
       if (resume) {
         formData.append("resume", resume);
       }
@@ -100,23 +103,26 @@ const AddYourDetailsForm = ({
         throw new Error("No authentication token found. Please log in again.");
       }
 
-      const response = await fetch(
-        `${ADD_MY_DETAILS_API}${
-          getMyDetails?.[0]?.resumeImage ? `/${getMyDetails[0].id}` : ""
-        }`,
-        {
-          method: getMyDetails?.[0]?.resumeImage ? "PATCH" : "POST",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            credentials: "include",
-            // 'Content-Type': 'multipart/form-data'
-          },
-          body: formData,
-        }
-      );
+      const isUpdate = getMyDetails?.[0]?.id;
+      const url = isUpdate
+        ? `${ADD_MY_DETAILS_API}/${getMyDetails[0].id}`
+        : ADD_MY_DETAILS_API;
+
+      console.log(`Sending ${isUpdate ? "PATCH" : "POST"} request to:`, url);
+      console.log("Form data:", Object.fromEntries(formData));
+
+      const response = await fetch(url, {
+        method: isUpdate ? "PATCH" : "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          // Let the browser set the Content-Type with the correct boundary
+        },
+        credentials: "include",
+        body: formData,
+      });
 
       const data = await response.json();
-      console.log(data, "data");
+      console.log("Response:", data);
 
       if (!response.ok) {
         throw new Error(data.message || "Failed to save details");
@@ -124,24 +130,27 @@ const AddYourDetailsForm = ({
 
       setSnackbar({
         open: true,
-        message: data.message || "Details saved successfully",
+        message: isUpdate
+          ? "Details updated successfully"
+          : "Details added successfully",
         severity: "success",
       });
-      setLoading(true);
+
+      // Refresh data and close form
+      fetchMyDetails();
+      fetchProjects();
 
       setTimeout(() => {
         onClose();
-        fetchProjects();
-        fetchMyDetails();
-        // handleAddUpdateYourDetails()
       }, 1000);
     } catch (error) {
       console.error("Error:", error);
       setSnackbar({
         open: true,
-        message: "All fields are required",
+        message: error.message || "Failed to save details. Please try again.",
         severity: "error",
       });
+    } finally {
       setLoading(false);
     }
   };
