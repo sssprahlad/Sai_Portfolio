@@ -14,7 +14,7 @@ require("./config/database");
 const app = express();
 
 const allowedOrigins = [
-  //  "https://sai-portfolio-tawny.vercel.app",
+  "https://sai-portfolio-tawny.vercel.app",
   "http://localhost:3000",
 ];
 
