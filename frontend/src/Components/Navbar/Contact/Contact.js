@@ -15,7 +15,7 @@ import { FaArrowUp } from "react-icons/fa";
 
 const Contact = () => {
   const { darkAndLightMode, myDetails } = useSelector(
-    (state) => state.services
+    (state) => state.services,
   );
   const [loading, setLoading] = useState(false);
 
@@ -310,6 +310,7 @@ const Contact = () => {
           width={"100%"}
           height={"400px"}
           style={{ border: 0 }}
+          title="Location Map"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"

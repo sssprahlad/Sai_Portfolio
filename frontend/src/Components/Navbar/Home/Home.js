@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -21,11 +21,7 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchMyDetails();
-  }, []);
-
-  const fetchMyDetails = async () => {
+  const fetchMyDetails = useCallback(async () => {
     try {
       setLoading(true);
       const response = await fetch(GET_MY_DETAILS_API, {
@@ -53,7 +49,11 @@ const Home = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [dispatch]);
+
+  useEffect(() => {
+    fetchMyDetails();
+  }, [fetchMyDetails]);
 
   const HorizontalScroll = () => {
     const items = [

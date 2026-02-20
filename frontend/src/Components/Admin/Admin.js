@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Admin.css";
 import { useNavigate } from "react-router-dom";
 import AddProjectForm from "./AddProjectForm/AddProjectForm";
@@ -152,9 +152,11 @@ const Admin = () => {
     fetchExperience();
   }, []);
 
+  const searchCondition = showExperienceTable && searchQuery;
+
   useEffect(() => {
     fetchSearchExperience();
-  }, [showExperienceTable && searchQuery]);
+  }, [searchCondition]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -219,7 +221,7 @@ const Admin = () => {
     }
   };
 
-  const fetchSearchExperience = async () => {
+  const fetchSearchExperience = useCallback(async () => {
     setIsLoading(true);
     try {
       const response = await fetch(
@@ -233,7 +235,7 @@ const Admin = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        }
+        },
       );
 
       if (response.status === 200) {
@@ -246,7 +248,7 @@ const Admin = () => {
       console.log(error);
       setIsLoading(false);
     }
-  };
+  }, [showExperienceTable, searchQuery]);
 
   console.log(getExperience, "getExperience");
 
@@ -265,7 +267,7 @@ const Admin = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        }
+        },
       );
       console.log(response, "projects response");
       if (response.status === 200) {
@@ -299,8 +301,8 @@ const Admin = () => {
                 showProjectsTable
                   ? "visable"
                   : showExperienceTable
-                  ? "visable"
-                  : "hidden"
+                    ? "visable"
+                    : "hidden"
               }`}
               type="search"
               disabled={!showProjectsTable && !showExperienceTable}
@@ -308,8 +310,8 @@ const Admin = () => {
                 showProjectsTable
                   ? "Search projects with title name..."
                   : showExperienceTable
-                  ? "Search experience with company name..."
-                  : "Search"
+                    ? "Search experience with company name..."
+                    : "Search"
               }
               onChange={(e) => setSearchQuery(e.target.value)}
             />
@@ -456,7 +458,7 @@ const Admin = () => {
             "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        }
+        },
       );
 
       const data = await response.json();
@@ -505,7 +507,7 @@ const Admin = () => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
           body: JSON.stringify(experienceToUpdate),
-        }
+        },
       );
 
       const data = await response.json();
@@ -562,7 +564,6 @@ const Admin = () => {
         fetchProjects();
       } else {
         throw new Error(data.message || "Failed to update project");
-        setLoading(false);
       }
     } catch (error) {
       console.error("Update error:", error);
