@@ -49,25 +49,17 @@ const Admin = () => {
   const [text, setText] = useState("");
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(originalProject)
+  console.log(originalProject);
 
   console.log(addProjectStatus, "status");
 
-  const fullText = "Admin";
+  const fullText = "Sai Prahlad";
 
   const { darkAndLightMode } = useSelector((state) => state.services);
   // const handleLogout = () => {
   //     localStorage.removeItem("token");
   //     navigate("/");
   // }
-
-  const toggleAddProjectForm = () => {
-    setShowAddProject(!showAddProject);
-  };
-
-  const toggleAddYourDetailsForm = () => {
-    setShowAddYourDetails(!showAddYourDetails);
-  };
 
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
@@ -114,16 +106,16 @@ const Admin = () => {
     }
   };
 
-      useEffect(() => {
-      let index = 0;
-      const interval = setInterval(() => {
-        setText(fullText.slice(0, index + 1));
-        index++;
-        if (index === fullText.length) clearInterval(interval);
-      }, 200);
+  useEffect(() => {
+    let index = 0;
+    const interval = setInterval(() => {
+      setText(fullText.slice(0, index + 1));
+      index++;
+      if (index === fullText.length) clearInterval(interval);
+    }, 200);
 
-      return () => clearInterval(interval);
-    }, [fullText]);
+    return () => clearInterval(interval);
+  }, [fullText]);
 
   useEffect(() => {
     let index = 0;
@@ -143,20 +135,88 @@ const Admin = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const fetchProjects = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      setLoading(true);
+      const response = await fetch(
+        `${GET_PROJECTS_API}${
+          showProjectsTable ? "/search?search=" : ""
+        }${searchQuery}`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      console.log(response, "projects response");
+      if (response.status === 200) {
+        const data = await response.json();
+        setProjects(data);
+        setIsLoading(false);
+        setSnackbar({
+          open: true,
+          message: data.message,
+          severity: "success",
+        });
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+      setSnackbar({
+        open: true,
+        message: error.message,
+        severity: "error",
+      });
+    }
+  }, [showProjectsTable, searchQuery]);
+
   useEffect(() => {
     fetchProjects();
-  }, [showProjectsTable && searchQuery]);
+  }, [showProjectsTable, searchQuery, fetchProjects]);
 
   useEffect(() => {
     fetchMyDetails();
     fetchExperience();
   }, []);
 
+  const fetchSearchExperience = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(
+        `${GET_MY_EXPERIENCE_API}${
+          showExperienceTable ? "/search?search=" : ""
+        }${searchQuery}`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+
+      if (response.status === 200) {
+        const data = await response.json();
+        setGetExperience(data?.data);
+        setIsLoading(false);
+        console.log(data, "data.rows");
+      }
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  }, [showExperienceTable, searchQuery]);
+
   const searchCondition = showExperienceTable && searchQuery;
 
   useEffect(() => {
     fetchSearchExperience();
-  }, [searchCondition]);
+  }, [searchCondition, fetchSearchExperience]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -221,75 +281,7 @@ const Admin = () => {
     }
   };
 
-  const fetchSearchExperience = useCallback(async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(
-        `${GET_MY_EXPERIENCE_API}${
-          showExperienceTable ? "/search?search=" : ""
-        }${searchQuery}`,
-        {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        },
-      );
-
-      if (response.status === 200) {
-        const data = await response.json();
-        setGetExperience(data?.data);
-        setIsLoading(false);
-        console.log(data, "data.rows");
-      }
-    } catch (error) {
-      console.log(error);
-      setIsLoading(false);
-    }
-  }, [showExperienceTable, searchQuery]);
-
   console.log(getExperience, "getExperience");
-
-  const fetchProjects = async () => {
-    try {
-      setIsLoading(true);
-      setLoading(true);
-      const response = await fetch(
-        `${GET_PROJECTS_API}${
-          showProjectsTable ? "/search?search=" : ""
-        }${searchQuery}`,
-        {
-          method: "GET",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        },
-      );
-      console.log(response, "projects response");
-      if (response.status === 200) {
-        const data = await response.json();
-        setProjects(data);
-        setIsLoading(false);
-        setSnackbar({
-          open: true,
-          message: data.message,
-          severity: "success",
-        });
-      }
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      setSnackbar({
-        open: true,
-        message: error.message,
-        severity: "error",
-      });
-    }
-  };
 
   const filterProjects = () => {
     return (
