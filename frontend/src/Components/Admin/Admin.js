@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./Admin.css";
-import { useNavigate } from "react-router-dom";
 import AddProjectForm from "./AddProjectForm/AddProjectForm";
 import AddYourDetailsForm from "./AddYourDetailsForm/AddYourDetailsForm";
 import {
@@ -50,6 +49,7 @@ const Admin = () => {
   const [text, setText] = useState("");
   const [visible, setVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  console.log(originalProject)
 
   console.log(addProjectStatus, "status");
 
@@ -114,34 +114,34 @@ const Admin = () => {
     }
   };
 
-  //     useEffect(() => {
-  //     let index = 0;
-  //     const interval = setInterval(() => {
-  //       setText(fullText.slice(0, index + 1));
-  //       index++;
-  //       if (index === fullText.length) clearInterval(interval);
-  //     }, 200);
+      useEffect(() => {
+      let index = 0;
+      const interval = setInterval(() => {
+        setText(fullText.slice(0, index + 1));
+        index++;
+        if (index === fullText.length) clearInterval(interval);
+      }, 200);
 
-  //     return () => clearInterval(interval);
-  //   }, [fullText]);
+      return () => clearInterval(interval);
+    }, [fullText]);
 
-  // useEffect(() => {
-  //   let index = 0;
+  useEffect(() => {
+    let index = 0;
 
-  //   const interval = setInterval(() => {
-  //     setText(fullText.slice(0, index + 1));
-  //     index++;
+    const interval = setInterval(() => {
+      setText(fullText.slice(0, index + 1));
+      index++;
 
-  //     if (index === fullText.length) {
-  //       setTimeout(() => {
-  //         index = 0;
-  //         setText("");
-  //       }, 1000);
-  //     }
-  //   }, 500);
+      if (index === fullText.length) {
+        setTimeout(() => {
+          index = 0;
+          setText("");
+        }, 1000);
+      }
+    }, 500);
 
-  //   return () => clearInterval(interval);
-  // }, []);
+    return () => clearInterval(interval);
+  }, []);
 
   useEffect(() => {
     fetchProjects();

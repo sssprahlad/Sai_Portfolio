@@ -3,7 +3,6 @@ import "./AddYourDetailsForm.css";
 import { useState } from "react";
 import { ADD_MY_DETAILS_API, API } from "../../../constants/Constants";
 import SnackbarPopup from "../../../constants/Snackbar";
-import { useSelector } from "react-redux";
 import CircularProgress from "@mui/material/CircularProgress";
 
 const AddYourDetailsForm = ({

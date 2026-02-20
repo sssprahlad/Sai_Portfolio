@@ -50,6 +50,7 @@ const Home = () => {
       setLoading(false);
     }
   }, [dispatch]);
+  console.log(getMyDetails)
 
   useEffect(() => {
     fetchMyDetails();
