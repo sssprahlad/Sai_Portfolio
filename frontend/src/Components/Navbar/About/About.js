@@ -89,6 +89,7 @@ const About = () => {
     link.href = fileUrl;
     link.download = myDetails?.resumeName;
     // link.target = "_blank";
+    link.setAttribute("download", myDetails?.resumeName || "Resume.pdf");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
