@@ -1,5 +1,4 @@
-export const API = "https://sai-portfolio-ngsu.onrender.com"
-
+export const API = "https://sai-portfolio-ngsu.onrender.com";
 
 //  "https://sai-portfolio-ngsu.onrender.com" || "http://localhost:3001";
 
