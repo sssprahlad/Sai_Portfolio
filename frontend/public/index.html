@@ -2,67 +2,69 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="/images/s-logo.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/s-logo.png?v=2" />
+    <link rel="shortcut icon" href="/images/s-logo.png?v=2" />
+    <link rel="apple-touch-icon" href="/images/s-logo.png" />
+
+    <!-- SEO Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-     <title>Sai Prahlad | Full Stack Developer </title>
+    <title>Sai Prahlad | Full Stack Developer</title>
 
-  <meta
-    name="description"
-    content="Sai Prahlad Full Stack Developer portfolio. Skilled in HTML, CSS, JavaScript, React.js, Node.js, Express.js, MongoDB, SQLite, Java, and Spring Boot, Python. Check out my projects, skills, and contact details."
-  />
+    <meta
+      name="description"
+      content="Sai Prahlad Full Stack Developer portfolio. Skilled in HTML, CSS, JavaScript, React.js, Node.js, Express.js, MongoDB, SQLite, Java, Spring Boot, and Python. View projects, skills, and contact details."
+    />
 
-  <meta
-    name="keywords"
-    content="sssprahlad, saiprahlad, siva satya sai prahlad kaki,k.sssprahlad, Sai Prahlad, Sai Prahlad developer, Sai Prahlad portfolio, React developer Sai Prahlad, Full Stack Developer Sai Prahlad"
-  />
+    <meta
+      name="keywords"
+      content="sssprahlad, saiprahlad, siva satya sai prahlad kaki, k.sssprahlad, Sai Prahlad, Sai Prahlad developer, Sai Prahlad portfolio, React developer Sai Prahlad, Full Stack Developer Sai Prahlad"
+    />
 
-  <meta name="author" content="Sai Prahlad" />
+    <meta name="author" content="Sai Prahlad" />
 
-     <!-- Open Graph for social media -->
-  <meta property="og:title" content="Sai Prahlad Portfolio" />
-  <meta property="og:description" content="Sai Prahlad Full Stack Developer" />
-  <meta property="og:url" content="https://sai-portfolio-tawny.vercel.app" />
-  <meta property="og:type" content="website" />
-  <meta property="og:logo" content="https://sai-portfolio-tawny.vercel.app/images/s-logo.png" />
-  <meta property="og:site_name" content="Sai Prahlad Portfolio" />
-  <meta property="og:locale" content="en_US" />
+    <!-- Open Graph (Social Media) -->
+    <meta property="og:title" content="Sai Prahlad Portfolio" />
+    <meta property="og:description" content="Sai Prahlad Full Stack Developer" />
+    <meta property="og:url" content="https://sai-portfolio-tawny.vercel.app" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://sai-portfolio-tawny.vercel.app/images/s-logo.png" />
+    <meta property="og:site_name" content="Sai Prahlad Portfolio" />
+    <meta property="og:locale" content="en_US" />
 
-  <link rel="apple-touch-icon" href="%PUBLIC_URL%/images/s-logo.png" />
+    <!-- Fonts & Styles -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
 
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap"
+      rel="stylesheet"
+    />
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap"
-    rel="stylesheet"
-  />
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json" />
 
-  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!-- Structured Data (SEO Boost) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Sai Prahlad",
+        "url": "https://sai-portfolio-tawny.vercel.app",
+        "logo": "https://sai-portfolio-tawny.vercel.app/images/s-logo.png",
+        "jobTitle": "Full Stack Developer",
+        "sameAs": [
+          "https://github.com/sssprahlad",
+          "https://www.linkedin.com/in/sai-prahlad-7346a1227/"
+        ]
+      }
+    </script>
 
-    <!-- <title>Sai Prahlad</title> -->
-
-     <!-- Structured Data for Google -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Sai Prahlad",
-    "url": "https://sai-portfolio-tawny.vercel.app",
-    "logo": "https://sai-portfolio-tawny.vercel.app/images/s-logo.png",
-    "jobTitle": "Full Stack Developer",
-    "sameAs": [
-      "https://github.com/sssprahlad",
-      "https://www.linkedin.com/in/sai-prahlad-7346a1227/"
-    ]
-  }
-  </script>
-
-
-
-
+    <!-- Loader Styles -->
     <style>
       .loader-container {
         display: flex;
@@ -95,14 +97,15 @@
       }
     </style>
   </head>
+
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+
     <div id="root">
       <div class="loader-container">
         <div class="spinner"></div>
         <p>Loading...</p>
       </div>
     </div>
-  
   </body>
 </html>
