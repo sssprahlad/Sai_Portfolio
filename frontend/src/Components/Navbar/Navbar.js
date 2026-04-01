@@ -119,14 +119,16 @@ const Navbar = () => {
             className="navbar-title"
           >
             Portfolio{" "}
+            
           </h1>
+          {/* <img src="https://res.cloudinary.com/wavelabs/image/upload/v1775026489/sssp_ktdmci.png" alt="Logo" className="navbar-logo" width="100" height="80"/> */}
+          {/* <img src="https://res.cloudinary.com/wavelabs/image/upload/v1775027075/sssp2_ht4ezw.png" alt="Logo" className="navbar-logo" width="100" height="70"/> */}
           <ul className="ul-nav-list">
             <li>
               {" "}
               <Link
-                className={`${
-                  location.pathname === "/" ? "nav-link active" : "nav-link"
-                }  ${darkAndLightMode ? "dark-link" : "light-link"}`}
+                className={`${location.pathname === "/" ? "nav-link active" : "nav-link"
+                  }  ${darkAndLightMode ? "dark-link" : "light-link"}`}
                 to="/"
               >
                 Home{" "}
@@ -134,11 +136,10 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                className={`${
-                  location.pathname === "/about"
+                className={`${location.pathname === "/about"
                     ? "nav-link active"
                     : "nav-link"
-                }  ${darkAndLightMode ? "dark-link" : "light-link"}`}
+                  }  ${darkAndLightMode ? "dark-link" : "light-link"}`}
                 to="/about"
               >
                 About{" "}
@@ -146,11 +147,10 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                className={`${
-                  location.pathname === "/projects"
+                className={`${location.pathname === "/projects"
                     ? "nav-link active"
                     : "nav-link"
-                }  ${darkAndLightMode ? "dark-link" : "light-link"}`}
+                  }  ${darkAndLightMode ? "dark-link" : "light-link"}`}
                 to="/projects"
               >
                 Projects{" "}
@@ -158,11 +158,10 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                className={`${
-                  location.pathname === "/contact"
+                className={`${location.pathname === "/contact"
                     ? "nav-link active"
                     : "nav-link"
-                }  ${darkAndLightMode ? "dark-link" : "light-link"}`}
+                  }  ${darkAndLightMode ? "dark-link" : "light-link"}`}
                 to="/contact"
               >
                 Contact{" "}
@@ -171,11 +170,10 @@ const Navbar = () => {
             {token && (
               <li>
                 <Link
-                  className={`${
-                    location.pathname === "/admin"
+                  className={`${location.pathname === "/admin"
                       ? "nav-link active"
                       : "nav-link"
-                  }  ${darkAndLightMode ? "dark-link" : "light-link"}`}
+                    }  ${darkAndLightMode ? "dark-link" : "light-link"}`}
                   to="/admin"
                 >
                   Admin{" "}
@@ -214,9 +212,8 @@ const Navbar = () => {
 
       <div className={`mobile-navbar ${darkAndLightMode ? "dark" : "light"}`}>
         <div
-          className={`mobile-navbar-header ${
-            darkAndLightMode ? "dark" : "light"
-          }`}
+          className={`mobile-navbar-header ${darkAndLightMode ? "dark" : "light"
+            }`}
         >
           <h1
             onClick={() => {
@@ -264,16 +261,14 @@ const Navbar = () => {
 
         {mobileMenuOpen && (
           <div
-            className={`mobile-navbar-menu ${
-              darkAndLightMode ? "dark" : "light"
-            }`}
+            className={`mobile-navbar-menu ${darkAndLightMode ? "dark" : "light"
+              }`}
           >
             <ul>
               <li onClick={handleNavClick}>
                 <Link
-                  className={`${
-                    location.pathname === "/" ? "nav-link active" : "nav-link"
-                  } ${darkAndLightMode ? "dark-link" : "light-link"}`}
+                  className={`${location.pathname === "/" ? "nav-link active" : "nav-link"
+                    } ${darkAndLightMode ? "dark-link" : "light-link"}`}
                   to="/"
                 >
                   {" "}
@@ -282,11 +277,10 @@ const Navbar = () => {
               </li>
               <li onClick={handleNavClick}>
                 <Link
-                  className={`${
-                    location.pathname === "/about"
+                  className={`${location.pathname === "/about"
                       ? "nav-link active"
                       : "nav-link"
-                  } ${darkAndLightMode ? "dark-link" : "light-link"}`}
+                    } ${darkAndLightMode ? "dark-link" : "light-link"}`}
                   to="/about"
                 >
                   {" "}
@@ -295,11 +289,10 @@ const Navbar = () => {
               </li>
               <li onClick={handleNavClick}>
                 <Link
-                  className={`${
-                    location.pathname === "/projects"
+                  className={`${location.pathname === "/projects"
                       ? "nav-link active"
                       : "nav-link"
-                  } ${darkAndLightMode ? "dark-link" : "light-link"}`}
+                    } ${darkAndLightMode ? "dark-link" : "light-link"}`}
                   to="/projects"
                 >
                   {" "}
@@ -308,11 +301,10 @@ const Navbar = () => {
               </li>
               <li onClick={handleNavClick}>
                 <Link
-                  className={`${
-                    location.pathname === "/contact"
+                  className={`${location.pathname === "/contact"
                       ? "nav-link active"
                       : "nav-link"
-                  } ${darkAndLightMode ? "dark-link" : "light-link"}`}
+                    } ${darkAndLightMode ? "dark-link" : "light-link"}`}
                   to="/contact"
                 >
                   {" "}
@@ -322,11 +314,10 @@ const Navbar = () => {
               {token && (
                 <li onClick={handleNavClick}>
                   <Link
-                    className={`${
-                      location.pathname === "/admin"
+                    className={`${location.pathname === "/admin"
                         ? "nav-link active"
                         : "nav-link"
-                    } ${darkAndLightMode ? "dark-link" : "light-link"}`}
+                      } ${darkAndLightMode ? "dark-link" : "light-link"}`}
                     to="/admin"
                   >
                     {" "}
