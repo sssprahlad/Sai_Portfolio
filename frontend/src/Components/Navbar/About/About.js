@@ -204,8 +204,9 @@ const About = () => {
           <div className="spinner"></div>
         ) : (
           <div className="skils-container">
+            
             <div className="frontend-container">
-              <h2>Frontend</h2>
+              <h2>Frontend Technologies</h2>
 
               <ul className="technical-skills-container">
                 {myDetails?.frontend?.map((skill, index) => {
@@ -219,7 +220,7 @@ const About = () => {
               </ul>
             </div>
             <div className="frontend-container">
-              <h2>Backend</h2>
+              <h2>Backend Technologies</h2>
               <ul className="technical-skills-container">
                 {myDetails?.backend?.map((skill, index) => {
                   const randomColor =
@@ -234,7 +235,7 @@ const About = () => {
             </div>
 
             <div className="frontend-container">
-              <h2>Database</h2>
+              <h2>Database Technologies</h2>
 
               <ul className="technical-skills-container">
                 {myDetails?.database?.map((skill, index) => {
@@ -253,6 +254,49 @@ const About = () => {
                 })}
               </ul>
             </div>
+            <div className={`frontend-container ${myDetails?.cloud?.[0] === 'none' ? 'hidden-container' : ''}`}>
+              <h2>Cloud Technologies</h2>
+              <ul className="technical-skills-container">
+                {myDetails?.cloud?.map((skill, index) => {
+                  const randomColor = buttonBgColors[index + 1];
+                  return (
+                    <li key={index} style={{ backgroundColor: randomColor }}>
+                      {skill}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            <div className={`frontend-container ${myDetails?.tools?.[0] === "none" ? 'hidden-container' : ""}`}>
+              <h2>Tools</h2>
+              <ul className="technical-skills-container">
+                {myDetails?.tools?.map((skill, index) => {
+                  const randomColor = buttonBgColors[index + 1];
+                  return (
+                    <li key={index} style={{ backgroundColor: randomColor }}>
+                      {skill}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+            <div className={`frontend-container ${myDetails?.otherSkills?.[0] === "none" ? 'hidden-container' : ''}`}>
+              <h2>Other Skills</h2>
+              <ul className="technical-skills-container">
+                {myDetails?.otherSkills?.map((skill, index) => {
+                  const randomColor = buttonBgColors[index + 1];
+                  return (
+                    <li key={index} style={{ backgroundColor: randomColor }}>
+                      {skill}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+
+
           </div>
         )}
       </div>

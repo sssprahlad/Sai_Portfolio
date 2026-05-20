@@ -27,6 +27,9 @@ router.post(
       frontend,
       backend,
       database,
+      cloud,
+      tools,
+      otherSkills,
       description,
       copyRightYear,
       portfolioLink,
@@ -52,6 +55,9 @@ router.post(
       !frontend ||
       !backend ||
       !database ||
+      !cloud ||
+      !tools ||
+      !otherSkills ||
       !description ||
       !copyRightYear ||
       !portfolioLink
@@ -64,7 +70,7 @@ router.post(
     const resumePath = req.file ? req.file.path : null;
 
     db.run(
-      "INSERT INTO myDetails (name,email,phone,address,profileImage,resume,linkedIn,github,twitter,facebook,instagram,whatsapp,location,frontend,backend,database,description,copyRightYear,portfolioLink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "INSERT INTO myDetails (name,email,phone,address,profileImage,resume,linkedIn,github,twitter,facebook,instagram,whatsapp,location,frontend,backend,database,cloud,tools,otherSkills,description,copyRightYear,portfolioLink) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         name,
         email,
@@ -88,6 +94,15 @@ router.post(
         Array.isArray(database)
           ? JSON.stringify(database)
           : JSON.stringify(database.split(",")),
+        Array.isArray(cloud)
+          ? JSON.stringify(cloud)
+          : JSON.stringify(cloud.split(",")),
+        Array.isArray(tools)
+          ? JSON.stringify(tools)
+          : JSON.stringify(tools.split(",")),
+        Array.isArray(otherSkills)
+          ? JSON.stringify(otherSkills)
+          : JSON.stringify(otherSkills.split(",")),
         description,
         copyRightYear,
         portfolioLink,
@@ -121,6 +136,9 @@ router.get("/my-details", (req, res) => {
         frontend: JSON.parse(row.frontend),
         backend: JSON.parse(row.backend),
         database: JSON.parse(row.database),
+        cloud: JSON.parse(row.cloud),
+        tools: JSON.parse(row.tools),
+        otherSkills: JSON.parse(row.otherSkills),
         resumePath: `${filename}`,
         resumeImage: `${filename}`,
         resumeName: filename.split("-").slice(1).join("-"),
@@ -244,6 +262,9 @@ router.patch(
       frontend,
       backend,
       database,
+      cloud,
+      tools,
+      otherSkills,
       description,
       copyRightYear,
       portfolioLink,
@@ -298,7 +319,7 @@ router.patch(
 
       db.run(
         `UPDATE myDetails
-             SET name = ?, email = ?, phone = ?, address = ?, profileImage = ?, resume = ?, linkedIn = ?, github = ?, twitter = ?, facebook = ?, instagram = ?, whatsapp = ?, location = ?, frontend = ?, backend = ?, database = ?, description = ?, copyRightYear = ?, portfolioLink = ?
+             SET name = ?, email = ?, phone = ?, address = ?, profileImage = ?, resume = ?, linkedIn = ?, github = ?, twitter = ?, facebook = ?, instagram = ?, whatsapp = ?, location = ?, frontend = ?, backend = ?, database = ?, cloud = ?, tools = ?, otherSkills = ?, description = ?, copyRightYear = ?, portfolioLink = ?
              WHERE id = ?`,
         [
           name,
@@ -323,6 +344,15 @@ router.patch(
           Array.isArray(database)
             ? JSON.stringify(database)
             : JSON.stringify(database.split(",")),
+          Array.isArray(cloud)
+            ? JSON.stringify(cloud)
+            : JSON.stringify(cloud.split(",")),
+          Array.isArray(tools)
+            ? JSON.stringify(tools)
+            : JSON.stringify(tools.split(",")),
+          Array.isArray(otherSkills)
+            ? JSON.stringify(otherSkills)
+            : JSON.stringify(otherSkills.split(",")),
           description,
           copyRightYear,
           portfolioLink,

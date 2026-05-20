@@ -49,6 +49,9 @@ db.run(`
             frontend TEXT NOT NULL,
             backend TEXT NOT NULL,
             database TEXT NOT NULL,
+            cloud TEXT NOT NULL,
+            tools TEXT NOT NULL,
+            otherSkills TEXT NOT NULL,
             description TEXT NOT NULL,
             copyRightYear TEXT NOT NULL,
             portfolioLink TEXT NOT NULL

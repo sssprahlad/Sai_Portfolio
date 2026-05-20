@@ -27,6 +27,9 @@ const AddYourDetailsForm = ({
     frontend: "",
     backend: "",
     database: "",
+    cloud: "",
+    tools: "",
+    otherSkills: "",
     description: "",
     copyRightYear: "",
     portfolioLink: "",
@@ -405,6 +408,46 @@ const AddYourDetailsForm = ({
               id="database"
               name="database"
               value={yourDetailsData.database}
+              onChange={handleChangeInput}
+              // required
+            />
+          </div>
+
+           <div className="form-group">
+            <label htmlFor="cloud">Cloud (comma separated)</label>
+            <input
+              type="text"
+              placeholder="e.g. AWS, Azure, Google Cloud"
+              id="cloud"
+              name="cloud"
+              value={yourDetailsData.cloud}
+              onChange={handleChangeInput}
+              // required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="tools">Tools (comma separated)</label>
+            <input
+              type="text"
+              placeholder="e.g. VS Code, Git, Docker"
+              id="tools"
+              name="tools"
+              value={yourDetailsData.tools}
+              onChange={handleChangeInput}
+              // required
+            />
+          </div>
+         
+          
+          <div className="form-group">
+            <label htmlFor="otherSkills">Other Skills (comma separated)</label>
+            <input
+              type="text"
+              placeholder="e.g. Problem Solving, Teamwork, Communication"
+              id="otherSkills"
+              name="otherSkills"
+              value={yourDetailsData.otherSkills}
               onChange={handleChangeInput}
               // required
             />
