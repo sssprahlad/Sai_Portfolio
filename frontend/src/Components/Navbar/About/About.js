@@ -310,7 +310,8 @@ const About = () => {
           {educationDetails?.map((education, index) => (
             <div class="education-card" key={index}>
               <div class="big-img-container">
-                <img src="https://kitspharma.com/img/about1.jpg" alt="bg-img" />
+                {/* https://kitspharma.com/img/about1.jpg */}
+                <img src="/images/kits_clg_img.avif" alt="bg-img" />
                 <div class="inner-hide-content">
                   <h1>{education.percentage}</h1>
                 </div>
